@@ -94,7 +94,8 @@ header.solido .cta-top:hover{background:var(--teal);color:#fff}
   transition:opacity .7s ease;overflow:hidden;background-size:cover;background-position:center}
 .scene.attiva{opacity:1;pointer-events:auto}
 .sfondo{position:absolute;inset:-5%;background-size:cover;background-position:center;
-  will-change:transform;transform:scale(1.03);z-index:-1}
+  transform:scale(1.03);z-index:-1}
+.scene.attiva .sfondo{will-change:transform}
 .scene.attiva .sfondo.kb-a{animation:kb-zoom 9s ease-out forwards}
 .scene.attiva .sfondo.kb-b{animation:kb-pan 9s ease-out forwards}
 @keyframes kb-zoom{from{transform:scale(1.03)}to{transform:scale(1.15)}}
@@ -141,7 +142,12 @@ header.solido .cta-top:hover{background:var(--teal);color:#fff}
 @media(max-width:768px){.sh-mouse{display:none}.sh-chevron{display:block}}
 @media(max-width:768px){
   .scene{align-items:flex-end;padding:0 1rem 3vh}
-  .scene-int{max-width:100%}
+  .scene-int{max-width:100%;backdrop-filter:none;-webkit-backdrop-filter:none;
+    background:rgba(255,255,255,.95);box-shadow:0 10px 28px rgba(11,43,48,.16)}
+  .scene.attiva .sfondo.kb-a,.scene.attiva .sfondo.kb-b{animation:none}
+  .sfondo{inset:0;transform:none}
+  .scene.attiva .sfondo{will-change:auto}
+  .scene-int>*{transition-duration:.4s}
   .scene h1,.scene h2{font-size:clamp(2rem,8.5vw,2.9rem)}
   .scene p{font-size:.95rem}
   .scene-int{padding:1.3rem 1.3rem 4rem}
@@ -149,7 +155,7 @@ header.solido .cta-top:hover{background:var(--teal);color:#fff}
   .sh-testo{color:var(--teal);text-shadow:none;font-size:.62rem}
   .sh-chevron{border-right-color:var(--teal);border-bottom-color:var(--teal)}
   .scene-int{max-width:100%;border-radius:0 0 999px 999px / 0 0 54px 54px}
-  .scene::before{background:linear-gradient(rgba(11,43,48,.28) 0%,rgba(11,43,48,0) 38%,rgba(11,43,48,.30) 100%)!important}
+  .scene::before{background:linear-gradient(rgba(11,43,48,.34) 0%,rgba(11,43,48,.04) 34%,rgba(11,43,48,.42) 100%)!important}
 }
 
 #hero-scroll{position:relative;z-index:2}
@@ -350,15 +356,16 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
 
   <section class="blocco" id="galleria">
     <div class="filo"></div>
-    <h2 class="titolo-sez">Gli <em>spazi</em></h2>
-    <p class="sotto-sez">Sette zone, ognuna pensata per un servizio: reception, Nails Space, pedicure, make-up, cabina estetica e laser, area relax.</p>
+    <h2 class="titolo-sez">Il <em>centro</em> in foto</h2>
+    <p class="sotto-sez">Lo staff, il Nails Space, le cabine e i trattamenti. Foto scattate qui, nessuna immagine di repertorio.</p>
     <div class="galleria">
-      <figure><img src="assets/scene-01.jpg" alt="Insegna Beauty Shine in oro nella reception del centro estetico ad Arzano" loading="lazy"><figcaption>Reception</figcaption></figure>
-      <figure><img src="assets/scene-02.jpg" alt="Postazione manicure Nails Space" loading="lazy"><figcaption>Nails Space</figcaption></figure>
-      <figure><img src="assets/scene-03.jpg" alt="Angolo pedicure con poltrone in velluto" loading="lazy"><figcaption>Pedicure</figcaption></figure>
-      <figure><img src="assets/scene-04.jpg" alt="Angolo make-up con specchio tondo e fiori" loading="lazy"><figcaption>Make-up</figcaption></figure>
-      <figure><img src="assets/scene-05.jpg" alt="Cabina estetica con apparecchiatura laser" loading="lazy"><figcaption>Cabina laser</figcaption></figure>
-      <figure><img src="assets/scene-06.jpg" alt="Area massaggi e relax" loading="lazy"><figcaption>Area relax</figcaption></figure>
+      <figure><img src="assets/sala-01.jpg" alt="Lo staff di Beauty Shine davanti all'insegna del centro estetico ad Arzano" loading="lazy" decoding="async" width="900" height="1200"><figcaption>Il nostro staff</figcaption></figure>
+      <figure><img src="assets/sala-02.jpg" alt="Postazioni manicure del Nails Space con clienti" loading="lazy" decoding="async" width="900" height="1200"><figcaption>Nails Space</figcaption></figure>
+      <figure><img src="assets/sala-03.jpg" alt="Trattamento viso con maschera LED a luce rossa" loading="lazy" decoding="async" width="900" height="1200"><figcaption>Maschera LED</figcaption></figure>
+      <figure><img src="assets/sala-04.jpg" alt="Trattamento viso con maschera LED a luce blu" loading="lazy" decoding="async" width="900" height="1200"><figcaption>Luce blu</figcaption></figure>
+      <figure><img src="assets/sala-05.jpg" alt="Rituale corpo con scrub preparato in cabina" loading="lazy" decoding="async" width="900" height="1200"><figcaption>Rituali corpo</figcaption></figure>
+      <figure><img src="assets/sala-06.jpg" alt="Dettaglio d'arredo della cabina estetica" loading="lazy" decoding="async" width="900" height="1200"><figcaption>La cabina</figcaption></figure>
+      <figure><img src="assets/sala-07.jpg" alt="Candela profumata accesa nell'area relax" loading="lazy" decoding="async" width="900" height="1200"><figcaption>Area relax</figcaption></figure>
     </div>
   </section>
 
@@ -509,7 +516,7 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
       var f = s.getAttribute('data-foto');
       var bg = s.querySelector('.sfondo');
       if (bg && f && !bg.style.backgroundImage) {
-        bg.style.backgroundImage = 'linear-gradient(rgba(11,43,48,.10), rgba(11,43,48,.34)), url(assets/' + f + (vert ? '-v' : '') + '.jpg)';
+        bg.style.backgroundImage = 'url(assets/' + f + (vert ? '-v' : '') + '.jpg)';
       }
     });
   }
