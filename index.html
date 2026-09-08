@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Centro Estetico ad Arzano (NA) | Beauty Shine — Nails, Laser, Sposa</title>
+<meta name="description" content="Beauty Shine, centro estetico ad Arzano (NA): ricostruzione unghie, epilazione laser, laminazione ciglia, trucco sposa, candle massage e criolipolisi. Prenota su WhatsApp al 331 859 8620.">
+<link rel="canonical" href="https://TUO-DOMINIO.it/">
+<meta name="robots" content="index, follow">
+<meta name="geo.region" content="IT-NA">
+<meta name="geo.placename" content="Arzano">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:title" content="Beauty Shine — Centro Estetico ad Arzano (NA)">
+<meta property="og:description" content="Nails, epilazione laser, laminazione ciglia, trucco sposa, candle massage e criolipolisi. Via Palmiro Togliatti 21/23, Arzano.">
+<meta property="og:url" content="https://TUO-DOMINIO.it/">
+<meta property="og:image" content="https://TUO-DOMINIO.it/assets/poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F7F4EF'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' fill='%23A9863F' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --panna:#F7F4EF; --panna2:#EFEAE1; --bianco:#FFFFFF;
+  --inchiostro:#2A2724; --inchiostro-soft:rgba(42,39,36,.68);
+  --oro:#C9A961; --oro-scuro:#A9863F; --oro-chiaro:#E4CE95;
+  --teal:#0F6B78; --teal-scuro:#0B4B53; --teal-luce:#3FC6BC;
+  --smeraldo:#1E5F52; --ocra:#B99248; --magenta:#8C00C1;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Jost','Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:auto}
+body{margin:0;background:var(--panna);color:var(--inchiostro);font-family:var(--sans);
+  font-weight:300;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.bloccato{overflow:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+/* ---------- PRELOADER ---------- */
+#preloader{position:fixed;inset:0;z-index:100;background:var(--panna);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.6rem;
+  transition:opacity .7s ease,visibility .7s ease}
+#preloader.via{opacity:0;visibility:hidden}
+.pl-logo{font-family:var(--serif);font-size:clamp(2rem,7vw,3.4rem);letter-spacing:.06em;
+  color:var(--oro-scuro);font-weight:400}
+.pl-barra{width:min(220px,54vw);height:2px;background:rgba(42,39,36,.14);overflow:hidden}
+.pl-barra span{display:block;height:100%;width:0;background:var(--oro);transition:width .3s ease}
+.pl-pct{font-size:.7rem;letter-spacing:.28em;color:var(--inchiostro-soft)}
+
+/* ---------- PROGRESSO ---------- */
+#progresso{position:fixed;top:0;left:0;height:3px;width:100%;z-index:60;
+  background:linear-gradient(90deg,var(--teal),var(--oro));
+  transform-origin:0 50%;transform:scaleX(0)}
+
+/* ---------- HEADER ---------- */
+header::after{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(rgba(11,43,48,.55),rgba(11,43,48,0));transition:opacity .4s ease}
+header.solido::after{opacity:0}
+header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;
+  justify-content:space-between;gap:1rem;padding:1rem clamp(1rem,4vw,2.6rem);
+  transition:background .4s ease,backdrop-filter .4s ease,border-color .4s ease;
+  border-bottom:1px solid transparent}
+header.solido{background:rgba(247,244,239,.92);backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);border-bottom-color:rgba(201,169,97,.35)}
+.marchio{font-family:var(--serif);font-size:clamp(1.2rem,2.6vw,1.6rem);letter-spacing:.06em;
+  color:#fff;text-decoration:none;white-space:nowrap;text-shadow:0 1px 10px rgba(0,0,0,.45);
+  transition:color .4s ease,text-shadow .4s ease}
+header.solido .marchio{color:var(--oro-scuro);text-shadow:none}
+.marchio .gk{color:var(--oro);font-size:.8em;margin-left:.18em}
+.marchio small{display:block;font-family:var(--sans);font-size:.52rem;letter-spacing:.32em;
+  color:rgba(255,255,255,.82);text-transform:uppercase;margin-top:.15rem;transition:color .4s ease}
+header.solido .marchio small{color:var(--inchiostro-soft)}
+nav{display:flex;gap:1.6rem}
+nav a{text-decoration:none;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.9);text-shadow:0 1px 8px rgba(0,0,0,.4);transition:color .3s ease}
+header.solido nav a{color:var(--inchiostro-soft);text-shadow:none}
+nav a:hover,header.solido nav a:hover{color:var(--teal)}
+.cta-top{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;
+  border:1px solid rgba(255,255,255,.85);color:#fff;background:rgba(15,107,120,.35);
+  padding:.55rem 1.1rem;border-radius:999px;backdrop-filter:blur(6px);
+  font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  transition:background .3s ease,color .3s ease}
+.cta-top:hover{background:var(--oro);border-color:var(--oro);color:#fff}
+header.solido .cta-top{border-color:var(--teal);color:var(--teal);background:transparent}
+header.solido .cta-top:hover{background:var(--teal);color:#fff}
+@media(max-width:900px){nav{display:none}}
+
+/* ---------- VIDEO + SCENE ---------- */
+#v{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;background:var(--panna2)}
+.scene{position:fixed;inset:0;z-index:5;display:flex;align-items:center;
+  padding:0 clamp(1.2rem,7vw,7rem);opacity:0;pointer-events:none;
+  transition:opacity .7s ease;overflow:hidden;background-size:cover;background-position:center}
+.scene.attiva{opacity:1;pointer-events:auto}
+.sfondo{position:absolute;inset:-5%;background-size:cover;background-position:center;
+  will-change:transform;transform:scale(1.03);z-index:-1}
+.scene.attiva .sfondo.kb-a{animation:kb-zoom 9s ease-out forwards}
+.scene.attiva .sfondo.kb-b{animation:kb-pan 9s ease-out forwards}
+@keyframes kb-zoom{from{transform:scale(1.03)}to{transform:scale(1.15)}}
+@keyframes kb-pan{from{transform:scale(1.1) translateX(1.5%)}to{transform:scale(1.1) translateX(-1.5%)}}
+.scene::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(90deg,rgba(11,43,48,.52) 0%,rgba(11,43,48,.16) 52%,rgba(11,43,48,.02) 100%)}
+.scene.destra::before{background:linear-gradient(270deg,rgba(11,43,48,.52) 0%,rgba(11,43,48,.16) 52%,rgba(11,43,48,.02) 100%)}
+.scene.destra{justify-content:flex-end;text-align:right}
+.scene-int{max-width:min(560px,88vw);transform:translateY(var(--dy,0px));will-change:transform;
+  background:rgba(255,255,255,.90);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  padding:clamp(1.5rem,4vw,2.4rem) clamp(1.4rem,4vw,2.8rem);border-radius:0 0 999px 999px / 0 0 90px 90px;
+  border:1px solid rgba(201,169,97,.35);box-shadow:0 18px 50px rgba(11,43,48,.20)}
+.scene-int>*{opacity:0;transform:translateY(18px);margin:0;
+  transition:opacity .55s ease,transform .55s cubic-bezier(.22,.9,.3,1)}
+.scene.attiva .scene-int>*{opacity:1;transform:translateY(0)}
+.scene.attiva .scene-int>*:nth-child(2){transition-delay:.1s}
+.scene.attiva .scene-int>*:nth-child(3){transition-delay:.2s}
+.scene.attiva .scene-int>*:nth-child(4){transition-delay:.3s}
+.occhiello{font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;color:var(--teal);
+  font-weight:500;margin-bottom:.9rem!important}
+.scene h1,.scene h2{font-family:var(--serif);font-weight:300;line-height:1.06;
+  font-size:clamp(2.3rem,6.4vw,4.6rem);letter-spacing:.01em;margin-bottom:1rem!important}
+.scene h1 em,.scene h2 em{font-style:normal;color:var(--oro-scuro)}
+.scene p{font-size:clamp(.95rem,1.6vw,1.08rem);color:var(--inchiostro-soft);max-width:44ch}
+.scene.destra p{margin-left:auto}
+
+/* ---------- SCROLL HINT ---------- */
+#scroll-hint{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:15;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;pointer-events:none;
+  transition:opacity .5s ease}
+#scroll-hint.nascosto{opacity:0}
+.sh-testo{font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;
+  color:rgba(243,233,220,.9);text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.sh-mouse{width:22px;height:36px;border:2px solid rgba(243,233,220,.75);border-radius:12px;
+  position:relative}
+.sh-mouse::after{content:'';position:absolute;top:6px;left:50%;margin-left:-2px;width:4px;
+  height:8px;border-radius:2px;background:rgba(243,233,220,.95);
+  animation:sh-drop 1.5s cubic-bezier(.4,0,.6,1) infinite}
+@keyframes sh-drop{0%{transform:translateY(0);opacity:1}70%{transform:translateY(13px);opacity:0}100%{opacity:0}}
+.sh-chevron{display:none;width:16px;height:16px;border-right:2px solid rgba(243,233,220,.8);
+  border-bottom:2px solid rgba(243,233,220,.8);transform:rotate(45deg);
+  animation:sh-drop 1.5s cubic-bezier(.4,0,.6,1) infinite}
+@media(max-width:768px){.sh-mouse{display:none}.sh-chevron{display:block}}
+@media(max-width:768px){
+  .scene{align-items:flex-end;padding-bottom:5vh}
+  .scene h1,.scene h2{font-size:clamp(2rem,8.5vw,2.9rem)}
+  .scene p{font-size:.95rem}
+  .scene-int{padding:1.3rem 1.3rem 3.2rem}
+  #scroll-hint{bottom:calc(5vh + 12px)}
+  .sh-testo{color:var(--teal);text-shadow:none;font-size:.62rem}
+  .sh-chevron{border-right-color:var(--teal);border-bottom-color:var(--teal)}
+  .scene-int{max-width:100%;border-radius:0 0 999px 999px / 0 0 54px 54px}
+  .scene::before{background:linear-gradient(rgba(11,43,48,.28) 0%,rgba(11,43,48,0) 38%,rgba(11,43,48,.30) 100%)!important}
+}
+
+#hero-scroll{position:relative;z-index:2}
+
+/* ---------- CONTENUTO ---------- */
+#contenuto{position:relative;z-index:20;background:var(--panna)}
+section.blocco{padding:clamp(3.5rem,9vw,7rem) clamp(1.2rem,6vw,5rem);max-width:1200px;margin:0 auto}
+.titolo-sez{font-family:var(--serif);font-weight:300;font-size:clamp(1.9rem,4.6vw,3.1rem);
+  line-height:1.12;margin:0 0 .8rem}
+.titolo-sez em{font-style:normal;color:var(--teal)}
+.sotto-sez{color:var(--inchiostro-soft);max-width:60ch;margin:0 0 2.6rem;font-size:1rem}
+.filo{width:52px;height:1px;background:var(--oro);margin-bottom:1.4rem}
+.ginkgo{display:block;font-size:1.5rem;color:var(--oro);line-height:1;margin-bottom:.5rem}
+
+/* servizi */
+.griglia{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--bianco);border:1px solid rgba(201,169,97,.30);border-radius:16px 16px 90px 90px;
+  padding:1.7rem 1.5rem;transition:transform .4s cubic-bezier(.22,.9,.3,1),border-color .4s ease,background .4s ease}
+.card:hover{transform:translateY(-6px);border-color:var(--teal);box-shadow:0 16px 40px rgba(11,43,48,.12)}
+.card h3{font-family:var(--serif);font-size:1.48rem;font-weight:400;margin:.2rem 0 .55rem;
+  color:var(--teal)}
+.card p{margin:0;font-size:.93rem;color:var(--inchiostro-soft)}
+.card .num{font-size:.68rem;letter-spacing:.28em;color:var(--oro-scuro);font-weight:500}
+
+/* passi */
+.passi{display:grid;gap:1.6rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));counter-reset:p}
+.passo{position:relative;padding-left:3.4rem}
+.passo::before{counter-increment:p;content:counter(p,decimal-leading-zero);position:absolute;
+  left:0;top:-.35rem;font-family:var(--serif);font-size:2.1rem;color:var(--oro)}
+.passo h3{font-size:1.05rem;font-weight:500;margin:0 0 .4rem;letter-spacing:.02em;color:var(--teal)}
+.passo p{margin:0;font-size:.92rem;color:var(--inchiostro-soft)}
+
+/* galleria */
+.galleria{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.galleria figure{margin:0;position:relative;overflow:hidden;border-radius:180px 180px 14px 14px;
+  border:1px solid rgba(201,169,97,.30);aspect-ratio:3/4;background:var(--panna2)}
+.galleria img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.22,.9,.3,1)}
+.galleria figure:hover img{transform:scale(1.07)}
+.galleria figcaption{position:absolute;left:0;right:0;bottom:0;padding:1.4rem 1rem .8rem;
+  font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
+  background:linear-gradient(transparent,rgba(11,43,48,.85));color:#fff}
+
+/* FAQ */
+.faq details{border-bottom:1px solid rgba(201,169,97,.30);padding:1.1rem 0}
+.faq summary{cursor:pointer;list-style:none;font-size:1.03rem;font-weight:400;
+  display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;color:var(--teal)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';color:var(--oro);font-size:1.4rem;line-height:1;transition:transform .3s ease}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{margin:.85rem 0 0;color:var(--inchiostro-soft);font-size:.95rem;max-width:70ch}
+
+/* contatti */
+.contatti-wrap{display:grid;gap:2.4rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:start}
+.info-riga{display:flex;gap:.9rem;padding:.85rem 0;border-bottom:1px solid rgba(201,169,97,.28)}
+.info-riga .et{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--oro-scuro);
+  min-width:92px;padding-top:.25rem}
+.info-riga .vl{font-size:1rem;color:var(--inchiostro)}
+.info-riga a{text-decoration:none;color:var(--teal);border-bottom:1px solid rgba(15,107,120,.4)}
+.cta-grande{display:inline-flex;align-items:center;gap:.7rem;margin-top:1.8rem;
+  background:var(--teal);color:#fff;text-decoration:none;font-weight:500;
+  padding:1rem 2rem;border-radius:999px;letter-spacing:.1em;text-transform:uppercase;
+  font-size:.82rem;transition:transform .3s ease,box-shadow .3s ease}
+.cta-grande:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(15,107,120,.32)}
+.mappa{border:0;width:100%;height:360px;border-radius:16px;border:1px solid rgba(201,169,97,.3)}
+
+/* social */
+.social-riga{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.6rem}
+.social-riga a{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;
+  border:1px solid rgba(201,169,97,.5);border-radius:999px;padding:.7rem 1.3rem;
+  font-size:.8rem;letter-spacing:.1em;color:var(--inchiostro);transition:border-color .3s ease,color .3s ease}
+.social-riga a:hover{border-color:var(--teal);color:var(--teal)}
+
+footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgba(255,255,255,.82);
+  padding:2.6rem clamp(1.2rem,6vw,5rem);display:flex;flex-wrap:wrap;gap:1rem;
+  justify-content:space-between;align-items:center;font-size:.78rem}
+
+/* WhatsApp flottante */
+.wa-flot{position:fixed;right:18px;bottom:18px;z-index:55;width:56px;height:56px;
+  border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 26px rgba(0,0,0,.45);text-decoration:none;transition:transform .3s ease}
+.wa-flot:hover{transform:scale(1.08)}
+.wa-flot svg{width:30px;height:30px;fill:#fff}
+
+@media(prefers-reduced-motion:reduce){
+  #v{display:none}
+  .scene{position:relative;opacity:1;min-height:70vh;padding:4rem 1.5rem}
+  .scene-int>*{opacity:1;transform:none}
+  #hero-scroll{display:none}
+  .sh-mouse::after,.sh-chevron{animation:none}
+}
+</style>
+</head>
+<body class="bloccato">
+
+<div id="preloader">
+  <div class="pl-logo">Beauty Shine</div>
+  <div class="pl-barra"><span id="pl-fill"></span></div>
+  <div class="pl-pct" id="pl-pct">0%</div>
+</div>
+
+<div id="progresso"></div>
+
+<header id="hdr">
+  <a class="marchio" href="#top">Beauty Shine<span class="gk">❦</span><small>Estetica e Benessere</small></a>
+  <nav>
+    <a href="#servizi">Servizi</a>
+    <a href="#centro">Il centro</a>
+    <a href="#galleria">Lavori</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contatti">Contatti</a>
+  </nav>
+  <a class="cta-top" href="https://wa.me/393318598620" target="_blank" rel="noopener">Prenota</a>
+</header>
+
+<video id="v" muted playsinline preload="auto" poster="assets/poster.jpg">
+  <source src="assets/master.mp4" type="video/mp4">
+</video>
+
+<section class="scene hero attiva" id="top" data-foto="scene-01">
+  <div class="sfondo kb-a"></div>
+  <div class="scene-int">
+    <p class="occhiello">Arzano &middot; Napoli</p>
+    <h1>Centro estetico <em>Beauty&nbsp;Shine</em></h1>
+    <p>Unghie, epilazione laser, sguardo, viso e corpo. Un salone nuovo, con uno spazio dedicato a ogni cosa che facciamo.</p>
+    <p class="occhiello" style="margin-top:1.2rem">Mar &ndash; Sab &middot; 9:30 &ndash; 20:00</p>
+  </div>
+</section>
+
+<section class="scene destra" data-foto="scene-02">
+  <div class="sfondo kb-b"></div>
+  <div class="scene-int">
+    <p class="occhiello">Nails Space</p>
+    <h2>L'angolo <em>manicure</em></h2>
+    <p>Ricostruzione, semipermanente, refill e nail art alla postazione dedicata. Forma, lunghezza e finitura decise insieme.</p>
+  </div>
+</section>
+
+<section class="scene" data-foto="scene-03">
+  <div class="sfondo kb-a"></div>
+  <div class="scene-int">
+    <p class="occhiello">Pedicure</p>
+    <h2>Piedi curati, <em>seduta comoda</em></h2>
+    <p>Pedicure estetico e curativo nelle poltrone dedicate, con tutto il tempo che serve e materiale monouso.</p>
+  </div>
+</section>
+
+<section class="scene destra" data-foto="scene-04">
+  <div class="sfondo kb-b"></div>
+  <div class="scene-int">
+    <p class="occhiello">Make-up</p>
+    <h2>Lo specchio delle <em>spose</em></h2>
+    <p>Angolo dedicato al trucco: sposa, cerimonia, sera. Con prova make-up prima del giorno dell'evento.</p>
+  </div>
+</section>
+
+<section class="scene" data-foto="scene-05">
+  <div class="sfondo kb-a"></div>
+  <div class="scene-int">
+    <p class="occhiello">Cabina estetica</p>
+    <h2>Epilazione laser e <em>trattamenti viso</em></h2>
+    <p>Cabina attrezzata con tecnologia professionale. Prima di iniziare valutiamo la zona e ti diciamo quante sedute servono davvero.</p>
+  </div>
+</section>
+
+<section class="scene destra" data-foto="scene-06">
+  <div class="sfondo kb-b"></div>
+  <div class="scene-int">
+    <p class="occhiello">Area relax</p>
+    <h2>Massaggi e <em>corpo</em></h2>
+    <p>Candle massage, criolipolisi e percorsi corpo nella zona relax, lontano dal rumore del salone.</p>
+    <p class="occhiello" style="margin-top:1.2rem">Scrivici su WhatsApp &middot; 331 859 8620</p>
+  </div>
+</section>
+
+<div id="scroll-hint" aria-hidden="true">
+  <span class="sh-testo">Scorri per scoprire</span>
+  <span class="sh-mouse"></span>
+  <span class="sh-chevron"></span>
+</div>
+
+<div id="hero-scroll"></div>
+
+<main id="contenuto">
+
+  <section class="blocco" id="servizi">
+    <div class="filo"></div>
+    <h2 class="titolo-sez">I nostri <em>servizi</em></h2>
+    <p class="sotto-sez">Tutto quello che facciamo da Beauty Shine, ad Arzano. Per prezzi e durata scrivici su WhatsApp: cambiano in base alla lunghezza, alla zona e al percorso che scegli.</p>
+    <div class="griglia">
+      <article class="card"><span class="num">01</span><h3>Ricostruzione unghie</h3><p>Gel e acrilico, allungamento con forma su misura, refill periodico. Struttura solida che dura.</p></article>
+      <article class="card"><span class="num">02</span><h3>Semipermanente &amp; nail art</h3><p>Colore a lunga tenuta, french, effetti e decori. Dalla nuance nude più discreta alla nail art elaborata.</p></article>
+      <article class="card"><span class="num">03</span><h3>Epilazione laser</h3><p>Viso e corpo, su tutte le zone. Percorso a sedute programmate, valutato insieme prima di iniziare.</p></article>
+      <article class="card"><span class="num">04</span><h3>Laminazione ciglia</h3><p>Effetto piega e volume senza extension, con nutrimento della ciglia. Risultato che dura settimane.</p></article>
+      <article class="card"><span class="num">05</span><h3>Laminazione sopracciglia</h3><p>Sopracciglia disciplinate e piene, con ridefinizione della forma e tinta se serve.</p></article>
+      <article class="card"><span class="num">06</span><h3>Trucco sposa e cerimonia</h3><p>Make-up per il tuo giorno, con prova precedente. Anche per invitate, testimoni e cerimonie.</p></article>
+      <article class="card"><span class="num">07</span><h3>Make-up</h3><p>Trucco giorno, sera ed eventi. Su richiesta, lezione per imparare a rifarlo a casa.</p></article>
+      <article class="card"><span class="num">08</span><h3>Trattamenti viso</h3><p>Pulizia, idratazione e percorsi mirati in base al tipo di pelle e alla stagione.</p></article>
+      <article class="card"><span class="num">09</span><h3>Candle massage</h3><p>Massaggio con olio caldo di candela: nutre la pelle e scioglie la tensione. Uno dei più richiesti.</p></article>
+      <article class="card"><span class="num">10</span><h3>Criolipolisi</h3><p>Trattamento non invasivo per il grasso localizzato, con valutazione preliminare della zona.</p></article>
+    </div>
+  </section>
+
+  <section class="blocco" id="centro">
+    <div class="filo"></div>
+    <h2 class="titolo-sez">Il <em>centro</em></h2>
+    <p class="sotto-sez">Beauty Shine è un centro estetico di Arzano, in provincia di Napoli. Il salone in Via Palmiro Togliatti, all'angolo con Via Sanremo, è stato inaugurato a maggio 2025: archi retroilluminati, marmo e ottone, e uno spazio dedicato a ogni servizio — dal Nails Space alla cabina laser, fino all'area relax per i massaggi.</p>
+    <div class="passi">
+      <div class="passo"><h3>Su appuntamento</h3><p>Lavoriamo su appuntamento per dedicarti il tempo che serve, senza attese e senza fretta.</p></div>
+      <div class="passo"><h3>Prodotti professionali</h3><p>Marchi professionali e protocolli di igiene rispettati su ogni singolo trattamento.</p></div>
+      <div class="passo"><h3>Consulenza prima</h3><p>Prima di partire ti diciamo cosa è realistico aspettarsi, quante sedute servono e quanto costa.</p></div>
+    </div>
+  </section>
+
+  <section class="blocco" id="prenotare">
+    <div class="filo"></div>
+    <h2 class="titolo-sez">Come <em>prenotare</em></h2>
+    <p class="sotto-sez">Tre passaggi, due minuti.</p>
+    <div class="passi">
+      <div class="passo"><h3>Scrivici su WhatsApp</h3><p>Al 331 859 8620, dicendo il trattamento che ti interessa. Se preferisci, chiama pure.</p></div>
+      <div class="passo"><h3>Scegliamo insieme</h3><p>Ti diciamo prezzo, durata e primo giorno libero. Se hai dubbi, ne parliamo prima.</p></div>
+      <div class="passo"><h3>Ti aspettiamo in salone</h3><p>Via Palmiro Togliatti 21/23, Arzano. Dal martedì al sabato, dalle 9:30 alle 20:00.</p></div>
+    </div>
+    <a class="cta-grande" href="https://wa.me/393318598620?text=Ciao%20Beauty%20Shine%2C%20vorrei%20prenotare%20un%20appuntamento" target="_blank" rel="noopener">Prenota su WhatsApp</a>
+  </section>
+
+  <section class="blocco" id="galleria">
+    <div class="filo"></div>
+    <h2 class="titolo-sez">Gli <em>spazi</em></h2>
+    <p class="sotto-sez">Sette zone, ognuna pensata per un servizio: reception, Nails Space, pedicure, make-up, cabina estetica e laser, area relax.</p>
+    <div class="galleria">
+      <figure><img src="assets/scene-01.jpg" alt="Insegna Beauty Shine in oro nella reception del centro estetico ad Arzano" loading="lazy"><figcaption>Reception</figcaption></figure>
+      <figure><img src="assets/scene-02.jpg" alt="Postazione manicure Nails Space" loading="lazy"><figcaption>Nails Space</figcaption></figure>
+      <figure><img src="assets/scene-03.jpg" alt="Angolo pedicure con poltrone in velluto" loading="lazy"><figcaption>Pedicure</figcaption></figure>
+      <figure><img src="assets/scene-04.jpg" alt="Angolo make-up con specchio tondo e fiori" loading="lazy"><figcaption>Make-up</figcaption></figure>
+      <figure><img src="assets/scene-05.jpg" alt="Cabina estetica con apparecchiatura laser" loading="lazy"><figcaption>Cabina laser</figcaption></figure>
+      <figure><img src="assets/scene-06.jpg" alt="Area massaggi e relax" loading="lazy"><figcaption>Area relax</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="blocco" id="faq">
+    <div class="filo"></div>
+    <h2 class="titolo-sez">Domande <em>frequenti</em></h2>
+    <div class="faq">
+      <details open><summary>Dove si trova Beauty Shine?</summary><p>In Via Palmiro Togliatti 21/23, all'angolo con Via Sanremo, ad Arzano (NA), a pochi minuti da Casoria, Casavatore, Frattamaggiore e dalla zona nord di Napoli.</p></details>
+      <details><summary>Quali sono gli orari di apertura?</summary><p>Siamo aperti dal martedì al sabato, dalle 9:30 alle 20:00. Domenica e lunedì chiuso.</p></details>
+      <details><summary>Come si prenota un appuntamento?</summary><p>Su WhatsApp o al telefono, al numero 331 859 8620. Lavoriamo su appuntamento, quindi è meglio scrivere qualche giorno prima, soprattutto per sabato.</p></details>
+      <details><summary>Quanto costa un trattamento?</summary><p>I prezzi dipendono dal trattamento, dalla zona e dalla durata del percorso. Scrivici su WhatsApp indicando cosa ti interessa e ti diamo il preventivo esatto prima di prenotare.</p></details>
+      <details><summary>Cos'è la laminazione ciglia?</summary><p>È un trattamento che dà piega e apertura alle ciglia naturali, senza applicare extension. Le ciglia vengono nutrite durante il processo e l'effetto dura in genere alcune settimane.</p></details>
+      <details><summary>Cos'è il candle massage?</summary><p>Un massaggio eseguito con l'olio caldo che cola da una candela da massaggio: la temperatura è piacevole sulla pelle e l'olio ha un effetto nutriente, mentre la manualità scioglie le tensioni.</p></details>
+      <details><summary>Cos'è la criolipolisi?</summary><p>Un trattamento non invasivo che agisce sul grasso localizzato tramite il raffreddamento controllato della zona. Prima di iniziare valutiamo insieme se è indicato nel tuo caso.</p></details>
+      <details><summary>Fate il trucco per le spose?</summary><p>Sì, ci occupiamo di trucco sposa e cerimonia, con prova make-up prima del giorno dell'evento. Su richiesta seguiamo anche invitate e testimoni.</p></details>
+      <details><summary>Quante sedute servono per l'epilazione laser?</summary><p>Dipende dalla zona, dal tipo di pelo e dalla persona. Alla prima visita valutiamo la zona e ti indichiamo un percorso realistico, senza promettere risultati che non possiamo garantire.</p></details>
+    </div>
+  </section>
+
+  <section class="blocco" id="contatti">
+    <div class="filo"></div>
+    <h2 class="titolo-sez">Dove <em>siamo</em></h2>
+    <div class="contatti-wrap">
+      <div>
+        <div class="info-riga"><span class="et">Indirizzo</span><span class="vl">Via Palmiro Togliatti 21/23<br>angolo Via Sanremo<br>80022 Arzano (NA)</span></div>
+        <div class="info-riga"><span class="et">Telefono</span><span class="vl"><a href="tel:+393318598620">331 859 8620</a></span></div>
+        <div class="info-riga"><span class="et">WhatsApp</span><span class="vl"><a href="https://wa.me/393318598620" target="_blank" rel="noopener">Scrivici ora</a></span></div>
+        <div class="info-riga"><span class="et">Orari</span><span class="vl">Martedì – Sabato · 9:30 – 20:00<br>Domenica e lunedì chiuso</span></div>
+        <div class="social-riga">
+          <a href="https://www.instagram.com/beautyshine_esteticaebenessere/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.tiktok.com/@beautyshine__" target="_blank" rel="noopener">TikTok</a>
+        </div>
+        <a class="cta-grande" href="https://wa.me/393318598620?text=Ciao%20Beauty%20Shine%2C%20vorrei%20prenotare%20un%20appuntamento" target="_blank" rel="noopener">Prenota su WhatsApp</a>
+      </div>
+      <div>
+        <iframe class="mappa" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mappa Beauty Shine Arzano"
+          src="https://www.google.com/maps?q=Via%20Palmiro%20Togliatti%2021%2C%2080022%20Arzano%20NA&output=embed"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© <span id="anno">2026</span> Beauty Shine — Estetica e Benessere · Arzano (NA)</span>
+    <span>Via Palmiro Togliatti 21/23 · 331 859 8620</span>
+  </footer>
+</main>
+
+<a class="wa-flot" href="https://wa.me/393318598620" target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16.004 2.667C8.64 2.667 2.67 8.638 2.67 16c0 2.35.61 4.65 1.77 6.68L2.667 29.33l6.81-1.78A13.28 13.28 0 0 0 16.004 29.3c7.363 0 13.333-5.97 13.333-13.333S23.367 2.667 16.004 2.667Zm0 24.4c-1.98 0-3.92-.53-5.61-1.53l-.4-.24-4.04 1.06 1.08-3.94-.26-.41a11.03 11.03 0 0 1-1.7-5.9c0-6.12 4.98-11.1 11.1-11.1 2.97 0 5.75 1.16 7.85 3.26a11.02 11.02 0 0 1 3.25 7.85c0 6.12-4.98 11.06-11.1 11.06Zm6.09-8.28c-.33-.17-1.97-.97-2.28-1.08-.3-.11-.53-.17-.75.17-.22.33-.86 1.08-1.05 1.3-.19.22-.39.25-.72.08-.33-.17-1.4-.52-2.67-1.65-.99-.88-1.65-1.96-1.85-2.29-.19-.33-.02-.51.15-.68.15-.15.33-.39.5-.58.16-.2.22-.34.33-.56.11-.22.06-.42-.03-.58-.08-.17-.75-1.81-1.03-2.48-.27-.65-.55-.56-.75-.57l-.64-.01c-.22 0-.58.08-.89.42-.3.33-1.16 1.14-1.16 2.77s1.19 3.22 1.36 3.44c.17.22 2.34 3.58 5.68 5.02.79.34 1.41.55 1.9.7.8.26 1.52.22 2.1.13.64-.09 1.97-.8 2.25-1.58.28-.78.28-1.44.19-1.58-.08-.14-.3-.22-.63-.39Z"/></svg>
+</a>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BeautySalon",
+      "@id": "https://TUO-DOMINIO.it/#business",
+      "name": "Beauty Shine - Estetica e Benessere",
+      "description": "Centro estetico ad Arzano (NA): ricostruzione unghie, semipermanente, epilazione laser, laminazione ciglia e sopracciglia, trucco sposa e cerimonia, trattamenti viso e corpo, candle massage e criolipolisi.",
+      "url": "https://TUO-DOMINIO.it/",
+      "telephone": "+39 331 859 8620",
+      "image": "https://TUO-DOMINIO.it/assets/poster.jpg",
+      "priceRange": "€€",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Palmiro Togliatti 21/23",
+        "addressLocality": "Arzano",
+        "addressRegion": "NA",
+        "postalCode": "80022",
+        "addressCountry": "IT"
+      },
+      "geo": { "@type": "GeoCoordinates", "latitude": 40.9086, "longitude": 14.2637 },
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday"],
+        "opens": "09:30",
+        "closes": "20:00"
+      }],
+      "areaServed": [
+        {"@type":"City","name":"Arzano"},
+        {"@type":"City","name":"Casoria"},
+        {"@type":"City","name":"Casavatore"},
+        {"@type":"City","name":"Frattamaggiore"},
+        {"@type":"City","name":"Napoli"}
+      ],
+      "sameAs": [
+        "https://www.instagram.com/beautyshine_esteticaebenessere/",
+        "https://www.tiktok.com/@beautyshine__"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servizi Beauty Shine",
+        "itemListElement": [
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Ricostruzione unghie"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Semipermanente e nail art"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Epilazione laser"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Laminazione ciglia"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Laminazione sopracciglia"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Trucco sposa e cerimonia"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Make-up"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Trattamenti viso"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Candle massage"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Criolipolisi"}}
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://TUO-DOMINIO.it/#faq",
+      "mainEntity": [
+        {"@type":"Question","name":"Dove si trova Beauty Shine?","acceptedAnswer":{"@type":"Answer","text":"In Via Palmiro Togliatti 21/23, all'angolo con Via Sanremo, ad Arzano (NA), a pochi minuti da Casoria, Casavatore, Frattamaggiore e dalla zona nord di Napoli."}},
+        {"@type":"Question","name":"Quali sono gli orari di apertura?","acceptedAnswer":{"@type":"Answer","text":"Siamo aperti dal martedì al sabato, dalle 9:30 alle 20:00. Domenica e lunedì chiuso."}},
+        {"@type":"Question","name":"Come si prenota un appuntamento?","acceptedAnswer":{"@type":"Answer","text":"Su WhatsApp o al telefono, al numero 331 859 8620. Lavoriamo su appuntamento, quindi è meglio scrivere qualche giorno prima, soprattutto per sabato."}},
+        {"@type":"Question","name":"Quanto costa un trattamento?","acceptedAnswer":{"@type":"Answer","text":"I prezzi dipendono dal trattamento, dalla zona e dalla durata del percorso. Scrivici su WhatsApp indicando cosa ti interessa e ti diamo il preventivo esatto prima di prenotare."}},
+        {"@type":"Question","name":"Cos'è la laminazione ciglia?","acceptedAnswer":{"@type":"Answer","text":"È un trattamento che dà piega e apertura alle ciglia naturali, senza applicare extension. Le ciglia vengono nutrite durante il processo e l'effetto dura in genere alcune settimane."}},
+        {"@type":"Question","name":"Cos'è il candle massage?","acceptedAnswer":{"@type":"Answer","text":"Un massaggio eseguito con l'olio caldo che cola da una candela da massaggio: la temperatura è piacevole sulla pelle e l'olio ha un effetto nutriente, mentre la manualità scioglie le tensioni."}},
+        {"@type":"Question","name":"Cos'è la criolipolisi?","acceptedAnswer":{"@type":"Answer","text":"Un trattamento non invasivo che agisce sul grasso localizzato tramite il raffreddamento controllato della zona. Prima di iniziare valutiamo insieme se è indicato nel tuo caso."}},
+        {"@type":"Question","name":"Fate il trucco per le spose?","acceptedAnswer":{"@type":"Answer","text":"Sì, ci occupiamo di trucco sposa e cerimonia, con prova make-up prima del giorno dell'evento. Su richiesta seguiamo anche invitate e testimoni."}},
+        {"@type":"Question","name":"Quante sedute servono per l'epilazione laser?","acceptedAnswer":{"@type":"Answer","text":"Dipende dalla zona, dal tipo di pelo e dalla persona. Alla prima visita valutiamo la zona e ti indichiamo un percorso realistico, senza promettere risultati che non possiamo garantire."}}
+      ]
+    }
+  ]
+}
+</script>
+
+<script>
+(function () {
+  'use strict';
+  var ridotto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var mobile  = matchMedia('(max-width: 768px)').matches;
+  var v       = document.getElementById('v');
+  var scene   = [].slice.call(document.querySelectorAll('.scene'));
+  var n       = scene.length;
+  var heroSp  = document.getElementById('hero-scroll');
+  var barra   = document.getElementById('progresso');
+  var hint    = document.getElementById('scroll-hint');
+  var pre     = document.getElementById('preloader');
+  var fill    = document.getElementById('pl-fill');
+  var pct     = document.getElementById('pl-pct');
+  var hdr     = document.getElementById('hdr');
+
+  document.getElementById('anno').textContent = new Date().getFullYear();
+
+  // sfondi di scena: solo quando NON c'e il video (mobile e fallback desktop)
+  function applicaSfondi(vert) {
+    scene.forEach(function (s) {
+      var f = s.getAttribute('data-foto');
+      var bg = s.querySelector('.sfondo');
+      if (bg && f && !bg.style.backgroundImage) {
+        bg.style.backgroundImage = 'linear-gradient(rgba(11,43,48,.10), rgba(11,43,48,.34)), url(assets/' + f + (vert ? '-v' : '') + '.jpg)';
+      }
+    });
+  }
+
+  if (ridotto) { applicaSfondi(); chiudiPreloader(); return; }
+
+  var attivo = 0, ultimoCambio = 0;
+
+  function chiudiPreloader() {
+    pre.classList.add('via');
+    document.body.classList.remove('bloccato');
+  }
+
+  function setScena(i) {
+    if (i === attivo) return;
+    var ora = Date.now();
+    if (ora - ultimoCambio < 150) return;
+    ultimoCambio = ora;
+    scene[attivo].classList.remove('attiva');
+    attivo = i;
+    scene[attivo].classList.add('attiva');
+  }
+
+  function aggiornaScene(p) {
+    if (isNaN(p)) p = 0;
+    p = Math.min(1, Math.max(0, p));
+    barra.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+    var i = Math.min(n - 1, Math.floor(p * n));
+    // isteresi: cambia solo se supero il confine di 0.02
+    var bassoAtt = attivo / n, altoAtt = (attivo + 1) / n;
+    if (p < bassoAtt - 0.02 || p > altoAtt + 0.02) setScena(i);
+    else if (i === attivo) { /* stabile */ }
+    var q = (p - attivo / n) * n;
+    var int = scene[attivo].querySelector('.scene-int');
+    if (int) int.style.setProperty('--dy', ((0.5 - q) * 36).toFixed(1) + 'px');
+  }
+
+  addEventListener('scroll', function () {
+    hint.classList.toggle('nascosto', scrollY > 30);
+    hdr.classList.toggle('solido', scrollY > 60);
+  }, { passive: true });
+
+  /* ---------- MOBILE: crossfade foto, niente video ---------- */
+  if (mobile) {
+    applicaSfondi(true);
+    if (v) v.remove();
+    var altezzaM = n * 90;                       // vh
+    heroSp.style.height = altezzaM + 'vh';
+    var targetM = 0, correnteM = 0;
+    addEventListener('scroll', function () {
+      var max = heroSp.offsetHeight - innerHeight;
+      targetM = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+    }, { passive: true });
+    (function tickM() {
+      correnteM += (targetM - correnteM) * 0.14;
+      aggiornaScene(correnteM);
+      requestAnimationFrame(tickM);
+    })();
+    var pf = new Image();
+    pf.onload = chiudiPreloader;
+    pf.onerror = chiudiPreloader;
+    pf.src = 'assets/scene-01-v.jpg';
+    fill.style.width = '100%'; pct.textContent = '100%';
+    setTimeout(chiudiPreloader, 2500);
+    return;
+  }
+
+  /* ---------- DESKTOP: scrubbing video ---------- */
+  var target = 0, corrente = 0, pronta = false;
+
+  function avvia() {
+    if (pronta) return;
+    pronta = true;
+    heroSp.style.height = Math.round(v.duration * 110) + 'vh';
+    chiudiPreloader();
+  }
+
+  v.addEventListener('loadedmetadata', function () {
+    heroSp.style.height = Math.round(v.duration * 110) + 'vh';
+  });
+  v.addEventListener('canplaythrough', avvia);
+  v.addEventListener('error', function () { fallback(); });
+
+  function fallback() {           // niente video: si comporta come mobile
+    applicaSfondi();
+    if (v) v.style.display = 'none';
+    heroSp.style.height = (n * 100) + 'vh';
+    avviaSenzaVideo();
+    chiudiPreloader();
+  }
+
+  var idBuf = setInterval(function () {
+    if (!v.duration) return;
+    var b = 0;
+    try { if (v.buffered.length) b = v.buffered.end(v.buffered.length - 1) / v.duration; } catch (e) {}
+    var p = Math.min(99, Math.round(b * 100));
+    fill.style.width = p + '%'; pct.textContent = p + '%';
+    if (b > 0.985) { clearInterval(idBuf); fill.style.width = '100%'; pct.textContent = '100%'; avvia(); }
+  }, 200);
+
+  setTimeout(function () { clearInterval(idBuf); if (!pronta) { if (v.duration) avvia(); else fallback(); } }, 9000);
+
+  var senzaVideo = false;
+  function avviaSenzaVideo() { senzaVideo = true; }
+
+  addEventListener('scroll', function () {
+    var max = heroSp.offsetHeight - innerHeight;
+    var p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+    if (senzaVideo) { target = p; }
+    else if (v.duration) { target = p * (v.duration - 0.05); }
+  }, { passive: true });
+
+  (function tick() {
+    corrente += (target - corrente) * 0.12;
+    if (senzaVideo) {
+      aggiornaScene(corrente);
+    } else if (v.duration) {
+      if (Math.abs(corrente - v.currentTime) > 0.01) { try { v.currentTime = corrente; } catch (e) {} }
+      aggiornaScene(corrente / v.duration);
+      var dentro = scrollY < heroSp.offsetHeight;
+      v.style.visibility = dentro ? 'visible' : 'hidden';
+    }
+    requestAnimationFrame(tick);
+  })();
+})();
+</script>
+</body>
+</html>

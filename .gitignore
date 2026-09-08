@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+._*
+
+# editor
+.vscode/
+.idea/
+
+# build / dipendenze (non servono: il sito e' HTML statico)
+node_modules/
+dist/
+*.log
+
+# materiale di lavoro non destinato al web
+brand/frames-estetista/
+lavorazione/
+
+# cartella creata automaticamente dall'app
+Claude outputs/
