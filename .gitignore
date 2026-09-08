@@ -11,8 +11,8 @@ node_modules/
 dist/
 *.log
 
-# materiale di lavoro non destinato al web
-brand/frames-estetista/
+# materiale di lavoro interno: non serve al sito e non va su un repo pubblico
+brand/
 lavorazione/
 
 # cartella creata automaticamente dall'app
