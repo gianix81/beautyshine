@@ -9,10 +9,11 @@ index.html          il sito (CSS e JS inline, nessuna dipendenza)
 robots.txt
 sitemap.xml
 assets/
-  master.mp4          video del salone reale (25 s, 10 MB) — scrubbing legato allo scroll
+  master.mp4          video girato nel salone (10 s, 7,7 MB) — scrubbing legato allo scroll
   poster.jpg          primo frame, usato dal preloader e come og:image
-  scene-01..06.jpg    le 6 scene in 16:9 (galleria e fallback desktop)
-  scene-01..06-v.jpg  le stesse scene in 9:16, usate su mobile
+  hero-01..03.jpg     i 3 fermo immagine dello scroll, 16:9 (fallback desktop)
+  hero-01..03-v.jpg   gli stessi in 9:16, usati su mobile
+  scene-01..06.jpg    le 6 zone del salone, usate nella galleria
 ```
 
 Si pubblica caricando l'intera cartella su un hosting statico (Hostinger, Netlify, Vercel).
@@ -34,9 +35,10 @@ Funziona anche aprendo `index.html` in locale.
 
 ## Immagini
 
-Tutte le scene vengono dai **video ufficiali TikTok** del centro: reception con l'insegna,
-Nails Space, pedicure, angolo make-up, cabina laser, area relax. Sottotitoli e watermark
-sono stati rimossi. Nessuna immagine è inventata.
+Lo scroll usa il **video girato nel salone** (10 s): la titolare davanti alla parete teal
+con l'insegna, poi il passaggio ai prodotti. Le foto della galleria vengono dai **video
+ufficiali TikTok** del centro — reception, Nails Space, pedicure, make-up, cabina laser,
+area relax — con sottotitoli e watermark rimossi. Nessuna immagine è inventata.
 
 Se in futuro avete foto professionali del salone, basta sostituire i file mantenendo
 nomi e proporzioni: `scene-0X.jpg` in 16:9 e `scene-0X-v.jpg` in 9:16.
@@ -76,5 +78,3 @@ apertura del nuovo salone (maggio 2025): **da confermare**.
 
 Nessuna recensione è stata inserita nel sito perché non ce ne sono di verificate
 riferite a Beauty Shine.
-# beautyshine
-# beautyshine
