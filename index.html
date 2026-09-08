@@ -89,8 +89,8 @@ header.solido .cta-top:hover{background:var(--teal);color:#fff}
 
 /* ---------- VIDEO + SCENE ---------- */
 #v{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;background:var(--panna2)}
-.scene{position:fixed;inset:0;z-index:5;display:flex;align-items:center;
-  padding:0 clamp(1.2rem,7vw,7rem);opacity:0;pointer-events:none;
+.scene{position:fixed;inset:0;z-index:5;display:flex;align-items:flex-end;
+  padding:0 clamp(1.2rem,6vw,5rem) clamp(4rem,9vh,7rem);opacity:0;pointer-events:none;
   transition:opacity .7s ease;overflow:hidden;background-size:cover;background-position:center}
 .scene.attiva{opacity:1;pointer-events:auto}
 .sfondo{position:absolute;inset:-5%;background-size:cover;background-position:center;
@@ -100,10 +100,10 @@ header.solido .cta-top:hover{background:var(--teal);color:#fff}
 @keyframes kb-zoom{from{transform:scale(1.03)}to{transform:scale(1.15)}}
 @keyframes kb-pan{from{transform:scale(1.1) translateX(1.5%)}to{transform:scale(1.1) translateX(-1.5%)}}
 .scene::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:linear-gradient(90deg,rgba(11,43,48,.52) 0%,rgba(11,43,48,.16) 52%,rgba(11,43,48,.02) 100%)}
-.scene.destra::before{background:linear-gradient(270deg,rgba(11,43,48,.52) 0%,rgba(11,43,48,.16) 52%,rgba(11,43,48,.02) 100%)}
+  background:linear-gradient(0deg,rgba(11,43,48,.62) 0%,rgba(11,43,48,.18) 42%,rgba(11,43,48,0) 68%)}
+
 .scene.destra{justify-content:flex-end;text-align:right}
-.scene-int{max-width:min(560px,88vw);transform:translateY(var(--dy,0px));will-change:transform;
+.scene-int{max-width:min(440px,42vw);transform:translateY(var(--dy,0px));will-change:transform;
   background:rgba(255,255,255,.90);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   padding:clamp(1.5rem,4vw,2.4rem) clamp(1.4rem,4vw,2.8rem);border-radius:0 0 999px 999px / 0 0 90px 90px;
   border:1px solid rgba(201,169,97,.35);box-shadow:0 18px 50px rgba(11,43,48,.20)}
@@ -120,6 +120,7 @@ header.solido .cta-top:hover{background:var(--teal);color:#fff}
 .scene h1 em,.scene h2 em{font-style:normal;color:var(--oro-scuro)}
 .scene p{font-size:clamp(.95rem,1.6vw,1.08rem);color:var(--inchiostro-soft);max-width:44ch}
 .scene.destra p{margin-left:auto}
+.scene h1,.scene h2{font-size:clamp(2rem,4.4vw,3.4rem)}
 
 /* ---------- SCROLL HINT ---------- */
 #scroll-hint{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:15;
@@ -139,11 +140,12 @@ header.solido .cta-top:hover{background:var(--teal);color:#fff}
   animation:sh-drop 1.5s cubic-bezier(.4,0,.6,1) infinite}
 @media(max-width:768px){.sh-mouse{display:none}.sh-chevron{display:block}}
 @media(max-width:768px){
-  .scene{align-items:flex-end;padding-bottom:5vh}
+  .scene{align-items:flex-end;padding:0 1rem 3vh}
+  .scene-int{max-width:100%}
   .scene h1,.scene h2{font-size:clamp(2rem,8.5vw,2.9rem)}
   .scene p{font-size:.95rem}
-  .scene-int{padding:1.3rem 1.3rem 3.2rem}
-  #scroll-hint{bottom:calc(5vh + 12px)}
+  .scene-int{padding:1.3rem 1.3rem 4rem}
+  #scroll-hint{bottom:calc(3vh + 10px)}
   .sh-testo{color:var(--teal);text-shadow:none;font-size:.62rem}
   .sh-chevron{border-right-color:var(--teal);border-bottom-color:var(--teal)}
   .scene-int{max-width:100%;border-radius:0 0 999px 999px / 0 0 54px 54px}
@@ -271,17 +273,17 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
   <div class="scene-int">
     <p class="occhiello">Arzano &middot; Napoli</p>
     <h1>Centro estetico <em>Beauty&nbsp;Shine</em></h1>
-    <p>Unghie, epilazione laser, sguardo, viso e corpo. Un salone nuovo, con uno spazio dedicato a ogni cosa che facciamo.</p>
+    <p>Unghie, epilazione laser, sguardo, viso e corpo. Uno spazio dedicato a ogni servizio.</p>
     <p class="occhiello" style="margin-top:1.2rem">Mar &ndash; Sab &middot; 9:30 &ndash; 20:00</p>
   </div>
 </section>
 
-<section class="scene destra" data-foto="hero-02">
+<section class="scene" data-foto="hero-02">
   <div class="sfondo kb-b"></div>
   <div class="scene-int">
     <p class="occhiello">Il centro</p>
     <h2>Ti seguiamo <em>una alla volta</em></h2>
-    <p>Si lavora su appuntamento, con il tempo giusto per capire cosa ti serve davvero. Nails Space, cabina estetica, pedicure, make-up e area relax: ogni servizio ha il suo spazio.</p>
+    <p>Si lavora su appuntamento, con il tempo giusto per capire cosa ti serve davvero.</p>
   </div>
 </section>
 
@@ -290,7 +292,7 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
   <div class="scene-int">
     <p class="occhiello">Prodotti professionali</p>
     <h2>Quello che usiamo <em>su di te</em></h2>
-    <p>Linee professionali selezionate, protocolli di igiene rispettati su ogni trattamento. E un consiglio onesto su cosa serve davvero alla tua pelle.</p>
+    <p>Linee professionali e igiene rispettata su ogni trattamento. Con un consiglio onesto su cosa serve davvero alla tua pelle.</p>
     <p class="occhiello" style="margin-top:1.2rem">Prenota su WhatsApp &middot; 331 859 8620</p>
   </div>
 </section>
