@@ -116,6 +116,14 @@ header.solido .cta-top:hover{background:var(--teal);color:#fff}
 .scene.attiva .scene-int>*:nth-child(4){transition-delay:.3s}
 .occhiello{font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;color:var(--teal);
   font-weight:500;margin-bottom:.9rem!important}
+.dettaglio{display:flex;flex-direction:column;gap:.3rem;
+  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);
+  font-weight:500;line-height:1.2;margin-top:1.4rem!important}
+.dettaglio span{white-space:nowrap}
+.dettaglio .sep{display:none}
+.dettaglio span:last-child{color:var(--oro-scuro);letter-spacing:.22em;font-weight:600}
+@media(max-width:768px){.dettaglio{gap:.26rem;letter-spacing:.15em;font-size:.66rem}
+  .dettaglio span:last-child{letter-spacing:.17em}}
 .scene h1,.scene h2{font-family:var(--serif);font-weight:300;line-height:1.06;
   font-size:clamp(2.3rem,6.4vw,4.6rem);letter-spacing:.01em;margin-bottom:1rem!important}
 .scene h1 em,.scene h2 em{font-style:normal;color:var(--oro-scuro)}
@@ -150,7 +158,7 @@ header.solido .cta-top:hover{background:var(--teal);color:#fff}
   .scene-int>*{transition-duration:.4s}
   .scene h1,.scene h2{font-size:clamp(2rem,8.5vw,2.9rem)}
   .scene p{font-size:.95rem}
-  .scene-int{padding:1.3rem 1.3rem 4rem}
+  .scene-int{padding:1.3rem 1.3rem 4.7rem}
   #scroll-hint{bottom:calc(3vh + 10px)}
   .sh-testo{color:var(--teal);text-shadow:none;font-size:.62rem}
   .sh-chevron{border-right-color:var(--teal);border-bottom-color:var(--teal)}
@@ -280,7 +288,7 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
     <p class="occhiello">Arzano &middot; Napoli</p>
     <h1>Centro estetico <em>Beauty&nbsp;Shine</em></h1>
     <p>Unghie, epilazione laser, sguardo, viso e corpo. Uno spazio dedicato a ogni servizio.</p>
-    <p class="occhiello" style="margin-top:1.2rem">Mar &ndash; Sab &middot; 9:30 &ndash; 20:00</p>
+    <p class="dettaglio"><span>Marted&igrave; &ndash; Sabato</span><span class="sep">&middot;</span><span>9:30 &ndash; 20:00</span></p>
   </div>
 </section>
 
@@ -299,7 +307,7 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
     <p class="occhiello">Prodotti professionali</p>
     <h2>Quello che usiamo <em>su di te</em></h2>
     <p>Linee professionali e igiene rispettata su ogni trattamento. Con un consiglio onesto su cosa serve davvero alla tua pelle.</p>
-    <p class="occhiello" style="margin-top:1.2rem">Prenota su WhatsApp &middot; 331 859 8620</p>
+    <p class="dettaglio"><span>Prenota su WhatsApp</span><span class="sep">&middot;</span><span>331&nbsp;859&nbsp;8620</span></p>
   </div>
 </section>
 
