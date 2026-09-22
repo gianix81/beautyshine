@@ -17,3 +17,6 @@ lavorazione/
 
 # cartella creata automaticamente dall'app
 Claude outputs/
+
+# file di scarto da eliminare a mano
+_to_delete/
