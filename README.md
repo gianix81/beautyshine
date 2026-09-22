@@ -66,7 +66,7 @@ Indicizzazione: 2-7 giorni. Posizionamento locale: 3-6 settimane.
 ## Dati usati nel sito
 
 - Indirizzo: Via Palmiro Togliatti 21/23, angolo Via Sanremo — 80022 Arzano (NA)
-- Telefono/WhatsApp: 331 859 8620
+- Telefono: 331 859 8620 (prenotazioni solo telefoniche o in salone)
 - Orari: martedì–sabato 9:30–20:00
 - Servizi: onicotecnica, semipermanente e nail art, epilazione laser, laminazione
   ciglia e sopracciglia, trucco sposa e cerimonia, make-up, trattamenti viso,
