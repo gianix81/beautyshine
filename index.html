@@ -569,28 +569,76 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
     hdr.classList.toggle('solido', scrollY > 60);
   }, { passive: true });
 
-  /* ---------- MOBILE: crossfade foto, niente video ---------- */
+  /* ---------- MOBILE: video verticale in loop (leggero) ---------- */
   if (mobile) {
-    applicaSfondi(true);
-    if (v) v.remove();
     var altezzaM = n * 90;                       // vh
     heroSp.style.height = altezzaM + 'vh';
-    var targetM = 0, correnteM = 0;
+    var targetM = 0, correnteM = 0, sporco = true, visibileM = true, chiusoM = false;
+
+    function prontoM() {
+      if (chiusoM) return;
+      chiusoM = true;
+      fill.style.width = '100%'; pct.textContent = '100%';
+      chiudiPreloader();
+    }
+
+    function fotoM() {                           // fallback: crossfade foto
+      applicaSfondi(true);
+      if (v && v.parentNode) { try { v.pause(); } catch (e) {} v.remove(); }
+      prontoM();
+    }
+
+    // connessione lenta o risparmio dati: niente video
+    var leggera = false;
+    try {
+      var cn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+      if (cn && (cn.saveData || /(^|-)2g$/.test(cn.effectiveType || ''))) leggera = true;
+    } catch (e) {}
+
+    if (!v || leggera) {
+      fotoM();
+    } else {
+      v.innerHTML = '';
+      v.loop = true; v.muted = true; v.defaultMuted = true;
+      v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
+      v.setAttribute('webkit-playsinline', '');
+      v.setAttribute('poster', 'assets/poster-m.jpg');
+      v.preload = 'auto';
+      v.src = 'assets/mobile-v1.mp4';
+      v.addEventListener('loadeddata', prontoM);
+      v.addEventListener('playing', prontoM);
+      v.addEventListener('error', fotoM);
+      v.load();
+      var pm = v.play();
+      if (pm && pm.catch) pm.catch(function () { fotoM(); });
+      setTimeout(function () { if (!chiusoM) prontoM(); }, 4000);
+    }
+
     addEventListener('scroll', function () {
       var max = heroSp.offsetHeight - innerHeight;
       targetM = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+      sporco = true;
     }, { passive: true });
+
     (function tickM() {
-      correnteM += (targetM - correnteM) * 0.14;
-      aggiornaScene(correnteM);
+      if (sporco) {
+        var d = targetM - correnteM;
+        correnteM += d * 0.14;
+        if (Math.abs(d) < 0.0004) { correnteM = targetM; sporco = false; }
+        aggiornaScene(correnteM);
+        // il video serve solo nell'hero: fuori lo fermo (batteria e CPU)
+        if (v && v.parentNode) {
+          var dentroM = scrollY < heroSp.offsetHeight;
+          if (dentroM !== visibileM) {
+            visibileM = dentroM;
+            v.style.visibility = dentroM ? 'visible' : 'hidden';
+            if (dentroM) { var r = v.play(); if (r && r.catch) r.catch(function () {}); }
+            else { try { v.pause(); } catch (e) {} }
+          }
+        }
+      }
       requestAnimationFrame(tickM);
     })();
-    var pf = new Image();
-    pf.onload = chiudiPreloader;
-    pf.onerror = chiudiPreloader;
-    pf.src = 'assets/hero-01-v.jpg';
-    fill.style.width = '100%'; pct.textContent = '100%';
-    setTimeout(chiudiPreloader, 2500);
     return;
   }
 
