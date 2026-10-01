@@ -17,10 +17,12 @@
 <meta property="og:image" content="https://TUO-DOMINIO.it/assets/poster-v2.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F7F4EF'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' fill='%23A9863F' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/cormorant-garamond.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/jost.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+/* font ospitati sul nostro dominio: nessuna chiamata a server terzi */
+@font-face{font-family:'Cormorant Garamond';src:url('assets/fonts/cormorant-garamond.woff2') format('woff2-variations'),url('assets/fonts/cormorant-garamond.woff2') format('woff2');font-weight:300 700;font-style:normal;font-display:swap}
+@font-face{font-family:'Jost';src:url('assets/fonts/jost.woff2') format('woff2-variations'),url('assets/fonts/jost.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
 :root{
   --panna:#F7F4EF; --panna2:#EFEAE1; --bianco:#FFFFFF;
   --inchiostro:#2A2724; --inchiostro-soft:rgba(42,39,36,.68);
@@ -227,7 +229,18 @@ section.blocco{padding:clamp(3.5rem,9vw,7rem) clamp(1.2rem,6vw,5rem);max-width:1
   padding:1rem 2rem;border-radius:999px;letter-spacing:.1em;text-transform:uppercase;
   font-size:.82rem;transition:transform .3s ease,box-shadow .3s ease}
 .cta-grande:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(15,107,120,.32)}
-.mappa{border:0;width:100%;height:360px;border-radius:16px;border:1px solid rgba(201,169,97,.3)}
+.mappa{border:0;width:100%;height:360px;border-radius:16px;border:1px solid rgba(201,169,97,.3);display:block}
+.mappa-box{width:100%;height:360px;border-radius:16px;border:1px solid rgba(201,169,97,.3);overflow:hidden;background:var(--panna2)}
+.mappa-ph{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:.7rem;padding:1.6rem}
+.mappa-t{font-family:var(--serif);font-size:1.3rem;color:var(--teal);margin:0}
+.mappa-d{font-size:.82rem;line-height:1.55;color:var(--inchiostro-soft);max-width:34ch;margin:0}
+.mappa-btn{margin-top:.4rem;cursor:pointer;border:0;background:var(--teal);color:#fff;
+  font-family:var(--sans);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  padding:.85rem 1.6rem;border-radius:999px;transition:background .3s ease}
+.mappa-btn:hover{background:var(--teal-scuro)}
+.mappa-n{font-size:.7rem;letter-spacing:.06em;color:var(--inchiostro-soft);margin:.2rem 0 0}
+.mappa-n a{color:var(--oro-scuro)}
 
 /* social */
 .social-riga{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.6rem}
@@ -238,7 +251,10 @@ section.blocco{padding:clamp(3.5rem,9vw,7rem) clamp(1.2rem,6vw,5rem);max-width:1
 
 footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgba(255,255,255,.82);
   padding:2.6rem clamp(1.2rem,6vw,5rem);display:flex;flex-wrap:wrap;gap:1rem;
-  justify-content:space-between;align-items:center;font-size:.78rem}
+  justify-content:space-between;align-items:center;font-size:.78rem;padding-bottom:calc(2.6rem + 74px)}
+.footer-legale a{color:var(--oro-chiaro);text-decoration:none;border-bottom:1px solid rgba(228,206,149,.45)}
+.footer-legale a:hover{color:#fff;border-bottom-color:#fff}
+footer .da-compilare{background:rgba(228,206,149,.22);color:var(--oro-chiaro);padding:0 .35em;border-radius:3px}
 
 /* Chiamata flottante */
 .tel-flot{position:fixed;right:18px;bottom:18px;z-index:55;height:56px;padding:0 1.25rem 0 1.05rem;
@@ -410,15 +426,22 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
         <a class="cta-grande" href="tel:+393318598620">Chiama 331 859 8620</a>
       </div>
       <div>
-        <iframe class="mappa" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mappa Beauty Shine Arzano"
-          src="https://www.google.com/maps?q=Via%20Palmiro%20Togliatti%2021%2C%2080022%20Arzano%20NA&output=embed"></iframe>
+        <div class="mappa-box" id="mappa-box">
+          <div class="mappa-ph">
+            <p class="mappa-t">Mappa Google</p>
+            <p class="mappa-d">Caricando la mappa, Google riceve il tuo indirizzo IP e pu&ograve; installare cookie propri. La mappa resta spenta finch&eacute; non la attivi tu.</p>
+            <button type="button" class="mappa-btn" id="mappa-btn">Carica la mappa</button>
+            <p class="mappa-n"><a href="cookie.html">Cookie policy</a> &middot; <a href="https://www.google.com/maps/search/?api=1&amp;query=Via+Palmiro+Togliatti+21,+80022+Arzano+NA" target="_blank" rel="noopener">Apri in Google Maps</a></p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <footer>
-    <span>© <span id="anno">2026</span> Beauty Shine — Estetica e Benessere · Arzano (NA)</span>
-    <span>Via Palmiro Togliatti 21/23 · 331 859 8620</span>
+    <span>&copy; <span id="anno">2026</span> Beauty Shine &mdash; Estetica e Benessere &middot; Arzano (NA)</span>
+    <span>Via Palmiro Togliatti 21/23 &middot; 331 859 8620 &middot; P.IVA <span class="da-compilare">DA COMPILARE</span></span>
+    <span class="footer-legale"><a href="privacy.html">Privacy policy</a> &middot; <a href="cookie.html">Cookie policy</a></span>
   </footer>
 </main>
 
@@ -519,6 +542,22 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
   var hdr     = document.getElementById('hdr');
 
   document.getElementById('anno').textContent = new Date().getFullYear();
+
+  // mappa Google: si carica solo se la persona la attiva (nessun cookie prima del consenso)
+  var mBtn = document.getElementById('mappa-btn');
+  if (mBtn) {
+    mBtn.addEventListener('click', function () {
+      var box = document.getElementById('mappa-box');
+      var f = document.createElement('iframe');
+      f.className = 'mappa';
+      f.title = 'Mappa Beauty Shine Arzano';
+      f.loading = 'lazy';
+      f.referrerPolicy = 'no-referrer-when-downgrade';
+      f.src = 'https://www.google.com/maps?q=Via%20Palmiro%20Togliatti%2021%2C%2080022%20Arzano%20NA&output=embed';
+      box.innerHTML = '';
+      box.appendChild(f);
+    });
+  }
 
   // sfondi di scena: solo quando NON c'e il video (mobile e fallback desktop)
   function applicaSfondi(vert) {

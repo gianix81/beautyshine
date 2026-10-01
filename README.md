@@ -21,17 +21,35 @@ Funziona anche aprendo `index.html` in locale.
 
 ## DA SOSTITUIRE prima di pubblicare
 
-1. **`TUO-DOMINIO.it`** → il dominio reale. Compare 7 volte in `index.html`
-   (canonical, og:url, og:image, JSON-LD) e in `robots.txt` / `sitemap.xml`.
-   Comando rapido: `sed -i '' 's|TUO-DOMINIO.it|iltuodominio.it|g' index.html robots.txt sitemap.xml`
-2. **P.IVA** — non inserita perché non disponibile. Va aggiunta nel footer e come
-   `"vatID"` nel blocco JSON-LD (obbligo di legge per un sito aziendale).
-3. **Email** — non inserita. Se ne avete una, aggiungerla nei contatti e in `"email"` nel JSON-LD.
-4. **Coordinate GPS** — nel JSON-LD ci sono le coordinate approssimative di Arzano
+1. **`TUO-DOMINIO.it`** → il dominio reale. Compare in `index.html`, `privacy.html`,
+   `cookie.html`, `robots.txt` e `sitemap.xml`.
+   Comando rapido: `sed -i '' 's|TUO-DOMINIO.it|iltuodominio.it|g' index.html privacy.html cookie.html robots.txt sitemap.xml`
+2. **`DA COMPILARE`** → i dati legali. Compaiono evidenziati in giallo nel footer di tutte
+   le pagine e dentro `privacy.html` / `cookie.html`. Servono:
+   - denominazione o ragione sociale del titolare del trattamento;
+   - P.IVA / codice fiscale (va messa anche come `"vatID"` nel JSON-LD di `index.html`);
+   - un indirizzo e-mail per le richieste privacy (artt. 15–22 GDPR).
+   Finché restano i segnaposto il sito **non è a norma**: vanno sostituiti prima di pubblicare.
+   Comando rapido, una volta noti i dati:
+   `sed -i '' 's|<span class="da-compilare">DA COMPILARE</span>|Ragione Sociale|g' privacy.html cookie.html index.html`
+   (meglio farlo campo per campo: i tre segnaposto hanno contenuti diversi).
+3. **Coordinate GPS** — nel JSON-LD ci sono le coordinate approssimative di Arzano
    (40.9086, 14.2637). Per la SEO locale conviene mettere quelle esatte del salone
    (le trovi su Google Maps col tasto destro sul punto).
-5. **Privacy policy / Cookie** — il sito carica Google Fonts e la mappa Google:
-   serve una pagina privacy e, se aggiungete analytics, un banner cookie.
+
+## Privacy e GDPR
+
+- `privacy.html` — informativa artt. 13–14 GDPR, da far verificare a un consulente.
+- `cookie.html` — cookie policy secondo le linee guida del Garante del 10/06/2021.
+- **Il sito non installa cookie** e non usa local storage: per questo non c'è il banner,
+  che il Garante non richiede quando non ci sono cookie da autorizzare.
+- I **font sono ospitati in `assets/fonts/`**, non su Google Fonts: nessuna chiamata a
+  server terzi al caricamento delle pagine (evita il problema del trasferimento dell'IP).
+- La **mappa Google è spenta** e si carica solo premendo «Carica la mappa»: finché non
+  si clicca, Google non riceve nulla.
+- **Attenzione:** se in futuro si aggiunge Google Analytics, il pixel di Meta o qualsiasi
+  strumento di tracciamento, diventa obbligatorio un banner cookie con consenso preventivo
+  e va aggiornata `cookie.html`.
 
 ## Immagini
 
