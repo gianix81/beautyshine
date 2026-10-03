@@ -30,6 +30,7 @@
   --teal:#0F6B78; --teal-scuro:#0B4B53; --teal-luce:#3FC6BC;
   --smeraldo:#1E5F52; --ocra:#B99248; --magenta:#8C00C1;
   --hdr:76px;   /* altezza dell'intestazione fissa: il video parte sotto, mai dietro */
+  --vh:100svh;  /* una pagina = uno schermo esatto */
   --serif:'Cormorant Garamond',Georgia,serif;
   --sans:'Jost','Helvetica Neue',Arial,sans-serif;
 }
@@ -138,7 +139,7 @@ header.solido .cta-top:hover{background:var(--teal);color:#fff}
 .scene h1,.scene h2{font-size:clamp(2rem,4.4vw,3.4rem)}
 
 /* ---------- SCROLL HINT ---------- */
-#scroll-hint{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:15;
+#scroll-hint{position:fixed;left:auto;right:30px;bottom:92px;transform:none;z-index:15;
   display:flex;flex-direction:column;align-items:center;gap:.5rem;pointer-events:none;
   transition:opacity .5s ease}
 #scroll-hint.nascosto{opacity:0}
@@ -157,7 +158,9 @@ header.solido .cta-top:hover{background:var(--teal);color:#fff}
 /* ===== MOBILE: l'apertura e' un solo schermo col video intero ===== */
 #hero-m{display:none}
 @media(max-width:768px){
-  body.vm #hero-m{display:block;padding:calc(var(--hdr) + 12px) 1.1rem 1.6rem;background:var(--panna)}
+  body.vm #hero-m{display:flex;flex-direction:column;justify-content:center;
+    min-height:var(--vh);scroll-snap-align:start;scroll-snap-stop:always;
+    padding:calc(var(--hdr) + 12px) 1.1rem 1.6rem;background:var(--panna)}
   body.vm .scene,body.vm #scroll-hint,body.vm #hero-scroll{display:none!important}
   #hero-m .occhiello{color:var(--oro-scuro)}
   #hero-m h1{font-size:clamp(1.9rem,8vw,2.6rem);line-height:1.1;margin:.3rem 0 1.1rem}
@@ -198,26 +201,32 @@ header.solido .cta-top:hover{background:var(--teal);color:#fff}
 }
 
 #hero-scroll{position:relative;z-index:2}
-/* Tappe da ESATTAMENTE uno schermo: un gesto porta alla tappa dopo e si ferma li'.
-   L'altezza non puo' superare la finestra, altrimenti con l'aggancio obbligatorio il punto
-   successivo non si raggiunge piu' e lo scroll si inchioda a meta' (provato: resta fermo).
-   L'aggancio e' "mandatory" ma SOLO dentro l'apertura (la classe la mette e la toglie il JS):
-   sulle sezioni di sotto, piu' alte di uno schermo, obbligherebbe salti scomodi. */
-#hero-scroll .tappa{height:100vh;scroll-snap-align:start;scroll-snap-stop:always}
-html.snap{scroll-snap-type:y mandatory}
+/* ===== Pagine intere: tutto il sito scorre una schermata alla volta ===== */
+html{scroll-snap-type:y mandatory}
+/* L'apertura e' UNA pagina: il video non e' legato allo scroll, parte da solo. */
+#hero-scroll{height:var(--vh);scroll-snap-align:start;scroll-snap-stop:always}
+/* Il pulsante che ricompare a fine video */
+.rivedi{display:none;align-items:center;gap:.5rem;margin-top:1rem;cursor:pointer;
+  border:1px solid var(--teal);background:transparent;color:var(--teal);border-radius:999px;
+  padding:.6rem 1.2rem;font-family:var(--sans);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase}
+.rivedi.si{display:inline-flex}
+.rivedi:hover{background:var(--teal);color:#fff}
 
 /* ---------- CONTENUTO ---------- */
 #contenuto{position:relative;z-index:20;background:var(--panna)}
-section.blocco{padding:clamp(3.5rem,9vw,7rem) clamp(1.2rem,6vw,5rem);max-width:1200px;margin:0 auto}
+section.blocco{height:var(--vh);display:flex;flex-direction:column;justify-content:center;overflow:hidden;
+  padding:calc(var(--hdr) + 18px) clamp(1.2rem,5vw,4rem) 30px;max-width:1280px;margin:0 auto;
+  scroll-snap-align:start;scroll-snap-stop:always}
+footer{scroll-snap-align:end}
 .titolo-sez{font-family:var(--serif);font-weight:300;font-size:clamp(1.9rem,4.6vw,3.1rem);
   line-height:1.12;margin:0 0 .8rem}
 .titolo-sez em{font-style:normal;color:var(--teal)}
-.sotto-sez{color:var(--inchiostro-soft);max-width:60ch;margin:0 0 2.6rem;font-size:1rem}
+.sotto-sez{color:var(--inchiostro-soft);max-width:72ch;margin:0 0 1.5rem;font-size:.97rem}
 .filo{width:52px;height:1px;background:var(--oro);margin-bottom:1.4rem}
 .ginkgo{display:block;font-size:1.5rem;color:var(--oro);line-height:1;margin-bottom:.5rem}
 
 /* servizi */
-.griglia{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.griglia{display:grid;gap:.8rem;grid-template-columns:repeat(5,1fr)}
 .card{background:var(--bianco);border:1px solid rgba(201,169,97,.30);border-radius:16px 16px 90px 90px;
   padding:1.7rem 1.5rem;transition:transform .4s cubic-bezier(.22,.9,.3,1),border-color .4s ease,background .4s ease}
 .card:hover{transform:translateY(-6px);border-color:var(--teal);box-shadow:0 16px 40px rgba(11,43,48,.12)}
@@ -235,7 +244,7 @@ section.blocco{padding:clamp(3.5rem,9vw,7rem) clamp(1.2rem,6vw,5rem);max-width:1
 .passo p{margin:0;font-size:.92rem;color:var(--inchiostro-soft)}
 
 /* galleria */
-.galleria{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.galleria{display:grid;gap:.8rem;grid-template-columns:repeat(6,1fr)}
 .galleria figure{margin:0;position:relative;overflow:hidden;border-radius:180px 180px 14px 14px;
   border:1px solid rgba(201,169,97,.30);aspect-ratio:3/4;background:var(--panna2)}
 .galleria img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.22,.9,.3,1)}
@@ -265,8 +274,8 @@ section.blocco{padding:clamp(3.5rem,9vw,7rem) clamp(1.2rem,6vw,5rem);max-width:1
   padding:1rem 2rem;border-radius:999px;letter-spacing:.1em;text-transform:uppercase;
   font-size:.82rem;transition:transform .3s ease,box-shadow .3s ease}
 .cta-grande:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(15,107,120,.32)}
-.mappa{border:0;width:100%;height:360px;border-radius:16px;border:1px solid rgba(201,169,97,.3);display:block}
-.mappa-box{width:100%;height:360px;border-radius:16px;border:1px solid rgba(201,169,97,.3);overflow:hidden;background:var(--panna2)}
+.mappa{border:0;width:100%;height:min(42vh,340px);border-radius:16px;border:1px solid rgba(201,169,97,.3);display:block}
+.mappa-box{width:100%;height:min(42vh,340px);border-radius:16px;border:1px solid rgba(201,169,97,.3);overflow:hidden;background:var(--panna2)}
 .mappa-ph{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;gap:.7rem;padding:1.6rem}
 .mappa-t{font-family:var(--serif);font-size:1.3rem;color:var(--teal);margin:0}
@@ -306,6 +315,61 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
   .scene-int>*{opacity:1;transform:none}
   #hero-scroll{display:none}
   .sh-mouse::after,.sh-chevron{animation:none}
+}
+/* ===== Misure: ogni sezione deve stare in uno schermo ===== */
+.titolo-sez{margin:0 0 .5rem}
+.filo{margin-bottom:.9rem}
+.card{padding:1rem .95rem 1.35rem;border-radius:14px 14px 60px 60px}
+.card h3{font-size:1.1rem;margin:.15rem 0 .35rem}
+.card p{font-size:.8rem;line-height:1.45}
+.passi{gap:1.1rem}
+.galleria figure{height:min(40vh,380px);border-radius:120px 120px 12px 12px}
+.faq details{padding:.58rem 0}
+.faq summary{font-size:.97rem}
+.faq p{margin:.55rem 0 0;font-size:.9rem}
+.cta-grande{margin-top:1.1rem}
+/* finestre basse: spariscono i testi di contorno, non i contenuti */
+@media(max-height:780px){
+  .sotto-sez{display:none}
+  .faq details{padding:.38rem 0}
+  .faq summary{font-size:.86rem}
+  .faq p{font-size:.82rem}
+  .info-riga{padding:.55rem 0}
+  .mappa-box,.mappa{height:min(30vh,250px)}
+  .card p{display:none}
+  .galleria figure{height:min(34vh,300px)}
+  .titolo-sez{font-size:clamp(1.6rem,3vw,2.2rem)}
+}
+
+
+/* ===== Misure per telefono: ogni sezione in uno schermo (dopo le regole base, se no perde) ===== */
+@media(max-width:768px){
+  section.blocco{padding:calc(var(--hdr) + 10px) 1.1rem 84px}
+  .griglia{grid-template-columns:1fr 1fr;gap:.55rem}
+  .card{padding:.7rem .65rem .9rem;border-radius:12px 12px 40px 40px}
+  .card h3{font-size:.95rem;margin:.1rem 0 0}
+  .card p{display:none}
+  .card .num{font-size:.56rem}
+  .passi{grid-template-columns:1fr;gap:.6rem}
+  .passo p{font-size:.84rem}
+  .galleria{grid-template-columns:1fr 1fr;gap:.5rem}
+  .galleria figure{height:min(18svh,180px);border-radius:60px 60px 10px 10px}
+  .galleria figcaption{font-size:.68rem;padding:.9rem .6rem .5rem}
+  .faq details{padding:.34rem 0}
+  .faq summary{font-size:.84rem;gap:.6rem}
+  .faq p{font-size:.8rem}
+  #faq .sotto-sez,#contatti .sotto-sez,#galleria .sotto-sez{display:none}
+  .contatti-wrap{grid-template-columns:1fr;gap:.8rem}
+  .mappa-box,.mappa{height:min(16svh,150px)}
+  .mappa-ph{gap:.25rem;padding:.5rem}
+  .mappa-d{font-size:.66rem;max-width:32ch}
+  .mappa-n{font-size:.64rem}
+  .info-riga{padding:.45rem 0;gap:.6rem}
+  .info-riga .vl{font-size:.86rem}
+  .info-riga .et{min-width:76px;font-size:.58rem}
+  .social-riga{margin:.35rem 0;font-size:.8rem}
+  .cta-grande{margin-top:.6rem}
+  .titolo-sez{font-size:1.7rem}
 }
 </style>
 </head>
@@ -433,7 +497,7 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
     <div class="filo"></div>
     <h2 class="titolo-sez">Domande <em>frequenti</em></h2>
     <div class="faq">
-      <details open><summary>Dove si trova Beauty Shine?</summary><p>In Via Palmiro Togliatti 21/23, all'angolo con Via Sanremo, ad Arzano (NA), a pochi minuti da Casoria, Casavatore, Frattamaggiore e dalla zona nord di Napoli.</p></details>
+      <details><summary>Dove si trova Beauty Shine?</summary><p>In Via Palmiro Togliatti 21/23, all'angolo con Via Sanremo, ad Arzano (NA), a pochi minuti da Casoria, Casavatore, Frattamaggiore e dalla zona nord di Napoli.</p></details>
       <details><summary>Quali sono gli orari di apertura?</summary><p>Siamo aperti dal martedì al sabato, dalle 9:30 alle 20:00. Domenica e lunedì chiuso.</p></details>
       <details><summary>Come si prenota un appuntamento?</summary><p>Solo per telefono, al 331 859 8620, oppure passando direttamente in salone negli orari di apertura. Lavoriamo su appuntamento, quindi è meglio chiamare qualche giorno prima, soprattutto per sabato.</p></details>
       <details><summary>Quanto costa un trattamento?</summary><p>I prezzi dipendono dal trattamento, dalla zona e dalla durata del percorso. Chiamaci indicando cosa ti interessa e ti diamo il preventivo esatto prima di prenotare.</p></details>
@@ -594,6 +658,15 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
     });
   }
 
+  // FAQ: una sola risposta aperta alla volta, altrimenti la sezione sfora la pagina
+  var faqs = [].slice.call(document.querySelectorAll('.faq details'));
+  faqs.forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (!d.open) return;
+      faqs.forEach(function (a) { if (a !== d) a.open = false; });
+    });
+  });
+
   // sfondi di scena: solo quando NON c'e il video (mobile e fallback desktop)
   function applicaSfondi(vert) {
     scene.forEach(function (s) {
@@ -750,97 +823,102 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
     return;
   }
 
-  /* ---------- DESKTOP: scrubbing video ---------- */
-  var target = 0, corrente = 0, pronta = false;
+  /* ---------- DESKTOP: video fluido ---------- */
+  // Il video NON e' legato allo scroll: parte da solo quando sparisce il preloader, non va in
+  // loop e si ferma sull'ultimo fotogramma. I pannelli di testo cambiano col TEMPO del video,
+  // la barra in alto mostra l'avanzamento del filmato, e a fine video compare «Rivedi il video».
+  // L'apertura occupa UNA pagina agganciata: lo scroll serve solo per scendere alle sezioni.
+  var pronta = false, finito = false;
 
-  // Tappe da uno schermo: ~2 s di video ciascuna, cosi' un gesto non fa correre il video.
-  // Con 10 s di filmato sono 5 tappe = 500vh, il massimo che l'apertura puo' occupare.
-  function impostaTappe() {
-    if (heroSp.children.length) return;
-    var durata = (v && v.duration) ? v.duration : n * 2;
-    var quante = Math.max(n, Math.min(5, Math.round(durata / 2)));
-    for (var i = 0; i < quante; i++) {
-      var t = document.createElement('div'); t.className = 'tappa'; heroSp.appendChild(t);
-    }
-    aggiornaSnap();
+  // dove inizia ogni pannello, in secondi. Il filmato e' una transizione continua (nessun
+  // taglio netto: verificato con la scene detection di ffmpeg), quindi si divide in parti uguali.
+  var TAGLI = [];
+  function calcolaTagli() {
+    var d = v.duration || 0;
+    TAGLI = [];
+    for (var i = 0; i < n; i++) TAGLI.push(d * i / n);
   }
 
-  // L'aggancio vale solo finche' si e' dentro l'apertura: piu' giu' le sezioni sono
-  // piu' alte di uno schermo e un aggancio obbligatorio le renderebbe scomode.
-  var snapOn = false;
-  function aggiornaSnap() {
-    // Si spegne appena si arriva all'ULTIMA tappa: oltre non ci sono piu' punti di aggancio
-    // e lo scroll resterebbe inchiodato li' (provato). Si riaccende solo risalendo di mezzo
-    // schermo, cosi' non sfarfalla sul confine.
-    var fine = heroSp.offsetHeight - innerHeight;
-    var dentro = snapOn ? scrollY < fine - 8 : scrollY < fine - innerHeight * 0.5;
-    if (dentro === snapOn) return;
-    snapOn = dentro;
-    document.documentElement.classList.toggle('snap', dentro);
+  // pulsante «Rivedi il video», nell'ultimo pannello accanto alla chiamata
+  var btnRivedi = document.createElement('button');
+  btnRivedi.type = 'button';
+  btnRivedi.className = 'rivedi';
+  btnRivedi.textContent = 'Rivedi il video';
+  var ultimo = scene[n - 1].querySelector('.scene-int');
+  if (ultimo) ultimo.appendChild(btnRivedi);
+
+  function parti() {
+    var r = v.play();
+    if (r && r.catch) r.catch(function () {    // autoplay negato: lo avvia la persona
+      btnRivedi.textContent = 'Guarda il video';
+      btnRivedi.classList.add('si');
+      setScena(n - 1);
+    });
   }
+  btnRivedi.addEventListener('click', function () {
+    btnRivedi.classList.remove('si');
+    finito = false;
+    v.currentTime = 0;
+    setScena(0);
+    parti();
+  });
 
   function avvia() {
     if (pronta) return;
     pronta = true;
-    impostaTappe();
+    calcolaTagli();
     chiudiPreloader();
+    parti();
   }
 
-  v.addEventListener('loadedmetadata', impostaTappe);
-  v.addEventListener('canplaythrough', avvia);
-  v.addEventListener('error', function () { fallback(); });
+  v.addEventListener('loadedmetadata', calcolaTagli);
+  v.addEventListener('canplay', avvia);
+  v.addEventListener('error', fallback);
 
-  function fallback() {           // niente video: si comporta come mobile
+  v.addEventListener('timeupdate', function () {
+    var d = v.duration || 1;
+    barra.style.transform = 'scaleX(' + Math.min(1, v.currentTime / d).toFixed(4) + ')';
+    var k = 0;
+    for (var i = n - 1; i >= 0; i--) { if (v.currentTime >= TAGLI[i] - 0.001) { k = i; break; } }
+    setScena(k);
+  });
+
+  v.addEventListener('ended', function () {
+    finito = true;
+    setScena(n - 1);
+    btnRivedi.textContent = 'Rivedi il video';
+    btnRivedi.classList.add('si');
+  });
+
+  function fallback() {           // niente video: restano le foto di scena, una ogni 4 s
     applicaSfondi();
     if (v) v.style.display = 'none';
-    impostaTappe();
-    avviaSenzaVideo();
     chiudiPreloader();
+    var k = 0;
+    setInterval(function () { k = (k + 1) % n; setScena(k); barra.style.transform = 'scaleX(' + ((k + 1) / n).toFixed(3) + ')'; }, 4000);
   }
 
+  // il preloader non deve restare appeso se il video ci mette troppo
   var idBuf = setInterval(function () {
     if (!v.duration) return;
     var b = 0;
     try { if (v.buffered.length) b = v.buffered.end(v.buffered.length - 1) / v.duration; } catch (e) {}
-    var p = Math.min(99, Math.round(b * 100));
-    fill.style.width = p + '%'; pct.textContent = p + '%';
-    if (b > 0.985) { clearInterval(idBuf); fill.style.width = '100%'; pct.textContent = '100%'; avvia(); }
+    var q = Math.min(99, Math.round(b * 100));
+    fill.style.width = q + '%'; pct.textContent = q + '%';
+    if (b > 0.35 || v.readyState >= 3) { clearInterval(idBuf); fill.style.width = '100%'; pct.textContent = '100%'; avvia(); }
   }, 200);
-
   setTimeout(function () { clearInterval(idBuf); if (!pronta) { if (v.duration) avvia(); else fallback(); } }, 9000);
 
-  var senzaVideo = false;
-  function avviaSenzaVideo() { senzaVideo = true; }
-
-  addEventListener('scroll', function () {
-    aggiornaSnap();
-    sveglia();
-    var max = heroSp.offsetHeight - innerHeight;
-    var p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
-    if (senzaVideo) { target = p; }
-    else if (v.duration) { target = p * (v.duration - 0.05); }
-  }, { passive: true });
-
-  // Un solo rAF, e si ferma appena il video ha raggiunto il punto dello scroll:
-  // tenerlo acceso a vuoto costava frame lunghi anche con la pagina ferma.
-  var inGiro = false;
-  function sveglia() { if (!inGiro) { inGiro = true; requestAnimationFrame(tick); } }
-  function tick() {
-    var d = target - corrente;
-    var soglia = senzaVideo ? 0.0008 : 0.012;
-    var fermo = Math.abs(d) < soglia;
-    corrente = fermo ? target : corrente + d * 0.18;
-    if (senzaVideo) {
-      aggiornaScene(corrente);
-    } else if (v.duration) {
-      if (Math.abs(corrente - v.currentTime) > 0.01) { try { v.currentTime = corrente; } catch (e) {} }
-      aggiornaScene(corrente / v.duration);
-      var dentro = scrollY < heroSp.offsetHeight;
-      v.style.visibility = dentro ? 'visible' : 'hidden';
-    }
-    if (fermo) inGiro = false; else requestAnimationFrame(tick);
+  // scendendo, il video si ferma; tornando su riprende, se non era gia' finito
+  if (window.IntersectionObserver) {
+    new IntersectionObserver(function (voci) {
+      voci.forEach(function (x) {
+        if (!pronta) return;
+        if (x.isIntersecting) { if (!finito && v.paused) parti(); }
+        else if (!v.paused) { try { v.pause(); } catch (e) {} }
+      });
+    }, { threshold: 0.25 }).observe(heroSp);
   }
-  sveglia();
 })();
 </script>
 </body>
