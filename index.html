@@ -29,6 +29,7 @@
   --oro:#C9A961; --oro-scuro:#A9863F; --oro-chiaro:#E4CE95;
   --teal:#0F6B78; --teal-scuro:#0B4B53; --teal-luce:#3FC6BC;
   --smeraldo:#1E5F52; --ocra:#B99248; --magenta:#8C00C1;
+  --hdr:76px;   /* altezza dell'intestazione fissa: il video parte sotto, mai dietro */
   --serif:'Cormorant Garamond',Georgia,serif;
   --sans:'Jost','Helvetica Neue',Arial,sans-serif;
 }
@@ -90,7 +91,10 @@ header.solido .cta-top:hover{background:var(--teal);color:#fff}
 @media(max-width:900px){nav{display:none}}
 
 /* ---------- VIDEO + SCENE ---------- */
-#v{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;background:var(--panna2)}
+/* Il video parte SOTTO l'intestazione: a tutto schermo l'header coprirebbe proprio
+   la fascia dove stanno i volti. object-position alto: quando cover taglia, taglia i piedi. */
+#v{position:fixed;top:var(--hdr);left:0;right:0;width:100%;height:calc(100% - var(--hdr));
+  object-fit:cover;object-position:50% 22%;z-index:1;background:var(--panna2)}
 .scene{position:fixed;inset:0;z-index:5;display:flex;align-items:flex-end;
   padding:0 clamp(1.2rem,6vw,5rem) clamp(4rem,9vh,7rem);opacity:0;pointer-events:none;
   transition:opacity .7s ease;overflow:hidden;background-size:cover;background-position:center}
@@ -150,7 +154,32 @@ header.solido .cta-top:hover{background:var(--teal);color:#fff}
   border-bottom:2px solid rgba(243,233,220,.8);transform:rotate(45deg);
   animation:sh-drop 1.5s cubic-bezier(.4,0,.6,1) infinite}
 @media(max-width:768px){.sh-mouse{display:none}.sh-chevron{display:block}}
+/* ===== MOBILE: l'apertura e' un solo schermo col video intero ===== */
+#hero-m{display:none}
 @media(max-width:768px){
+  body.vm #hero-m{display:block;padding:calc(var(--hdr) + 12px) 1.1rem 1.6rem;background:var(--panna)}
+  body.vm .scene,body.vm #scroll-hint,body.vm #hero-scroll{display:none!important}
+  #hero-m .occhiello{color:var(--oro-scuro)}
+  #hero-m h1{font-size:clamp(1.9rem,8vw,2.6rem);line-height:1.1;margin:.3rem 0 1.1rem}
+  #hero-m h1 em{font-style:normal;color:var(--teal)}
+  /* il video sta nel suo 16:9: niente cover su schermo verticale, che ne taglierebbe tre quarti */
+  .vid-cornice{position:relative;aspect-ratio:16/9;border:1px solid rgba(201,169,97,.55);
+    border-radius:10px;overflow:hidden;background:var(--panna2)}
+  .vid-cornice #v{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;
+    object-position:50% 45%}
+  .vid-barra{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.28)}
+  .vid-barra span{display:block;height:100%;width:0;background:var(--oro)}
+  .vid-rivedi{position:absolute;inset:0;margin:auto;width:max-content;height:max-content;
+    display:none;align-items:center;gap:.5rem;border:1px solid rgba(255,255,255,.9);
+    background:rgba(11,43,48,.55);color:#fff;font-family:var(--sans);font-size:.72rem;
+    letter-spacing:.16em;text-transform:uppercase;padding:.6rem 1.1rem;border-radius:999px}
+  .vid-rivedi.si{display:inline-flex}
+  #hero-m .dida{min-height:4.2em;margin:.9rem 0 1.1rem;font-size:.95rem;color:var(--inchiostro-soft)}
+  #hero-m .dida b{display:block;font-family:var(--serif);font-weight:400;font-size:1.3rem;
+    color:var(--inchiostro);margin-bottom:.2rem}
+  #hero-m .btn-chiama{display:inline-flex;align-items:center;gap:.5rem;background:var(--teal);
+    color:#fff;text-decoration:none;padding:.85rem 1.4rem;border-radius:999px;
+    font-family:var(--sans);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase}
   .scene{align-items:flex-end;padding:0 1rem 3vh}
   .scene-int{max-width:100%;backdrop-filter:none;-webkit-backdrop-filter:none;
     background:rgba(255,255,255,.95);box-shadow:0 10px 28px rgba(11,43,48,.16)}
@@ -169,6 +198,9 @@ header.solido .cta-top:hover{background:var(--teal);color:#fff}
 }
 
 #hero-scroll{position:relative;z-index:2}
+/* una tappa per scena: ogni rotellata porta alla scena dopo, il video ci arriva col lerp */
+#hero-scroll .tappa{height:100vh;scroll-snap-align:start;scroll-snap-stop:always}
+html.snap{scroll-snap-type:y proximity}
 
 /* ---------- CONTENUTO ---------- */
 #contenuto{position:relative;z-index:20;background:var(--panna)}
@@ -607,26 +639,48 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
     hdr.classList.toggle('solido', scrollY > 60);
   }, { passive: true });
 
-  /* ---------- MOBILE: video verticale in loop (leggero) ---------- */
+  /* ---------- MOBILE: una schermata sola, il video intero ---------- */
+  // Niente scroll legato al video, niente foto a scorrimento: su telefono l'apertura e'
+  // UNA schermata. Il video 16:9 parte da solo, non va in loop e si ferma sull'ultimo
+  // fotogramma; sotto, una didascalia per scena che segue il tempo del video.
   if (mobile) {
-    var altezzaM = n * 90;                       // vh
-    heroSp.style.height = altezzaM + 'vh';
-    var targetM = 0, correnteM = 0, sporco = true, visibileM = true, chiusoM = false;
+    document.body.classList.add('vm');
 
-    function prontoM() {
-      if (chiusoM) return;
-      chiusoM = true;
-      fill.style.width = '100%'; pct.textContent = '100%';
-      chiudiPreloader();
-    }
+    function html(el) { return el ? el.innerHTML : ''; }
+    function descr(sc) { return sc.querySelector('.scene-int > p:not(.occhiello):not(.dettaglio)'); }
 
-    function fotoM() {                           // fallback: crossfade foto
-      applicaSfondi(true);
-      if (v && v.parentNode) { try { v.pause(); } catch (e) {} v.remove(); }
-      prontoM();
-    }
+    var dida = scene.map(function (sc) {
+      return '<b>' + html(sc.querySelector('h1, h2')) + '</b>' + html(descr(sc));
+    });
 
-    // connessione lenta o risparmio dati: niente video
+    var hm = document.createElement('section');
+    hm.id = 'hero-m';
+    hm.innerHTML =
+      '<p class="occhiello">' + html(scene[0].querySelector('.occhiello')) + '</p>' +
+      '<h1>' + html(scene[0].querySelector('h1')) + '</h1>' +
+      '<div class="vid-cornice">' +
+        '<div class="vid-barra"><span></span></div>' +
+        '<button type="button" class="vid-rivedi">Rivedi</button>' +
+      '</div>' +
+      '<p class="dida"></p>' +
+      '<a class="btn-chiama" href="tel:+393318598620">Chiama 331 859 8620</a>';
+    var cont = document.getElementById('contenuto');
+    cont.parentNode.insertBefore(hm, cont);
+
+    var cornice = hm.querySelector('.vid-cornice');
+    var fillV   = hm.querySelector('.vid-barra span');
+    var btnV    = hm.querySelector('.vid-rivedi');
+    var dEl     = hm.querySelector('.dida');
+    dEl.innerHTML = dida[0];
+
+    // l'H1 e i testi vivono ora nell'apertura mobile: le scene fisse escono dal documento
+    scene.forEach(function (sc) { if (sc.parentNode) sc.parentNode.removeChild(sc); });
+    if (heroSp && heroSp.parentNode) heroSp.parentNode.removeChild(heroSp);
+
+    var chiusoM = false;
+    function prontoM() { if (chiusoM) return; chiusoM = true; fill.style.width = '100%'; pct.textContent = '100%'; chiudiPreloader(); }
+
+    // risparmio dati o 2G: resta il poster, nessun video scaricato
     var leggera = false;
     try {
       var cn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
@@ -634,72 +688,92 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
     } catch (e) {}
 
     if (!v || leggera) {
-      fotoM();
+      if (v && v.parentNode) v.parentNode.removeChild(v);
+      cornice.style.background = 'var(--panna2) url(assets/poster-m.jpg) center/cover';
+      prontoM();
     } else {
+      cornice.insertBefore(v, cornice.firstChild);
       v.innerHTML = '';
-      v.loop = true; v.muted = true; v.defaultMuted = true;
-      v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
-      v.setAttribute('webkit-playsinline', '');
+      v.loop = false; v.removeAttribute('loop');
+      v.muted = true; v.defaultMuted = true;
+      v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
       v.setAttribute('poster', 'assets/poster-m.jpg');
       v.preload = 'auto';
-      v.src = 'assets/mobile-v1.mp4';
+      v.src = 'assets/master-m.mp4?v=3';
+
       v.addEventListener('loadeddata', prontoM);
       v.addEventListener('playing', prontoM);
-      v.addEventListener('error', fotoM);
+      v.addEventListener('error', function () {
+        if (v.parentNode) v.parentNode.removeChild(v);
+        cornice.style.background = 'var(--panna2) url(assets/poster-m.jpg) center/cover';
+        prontoM();
+      });
+      v.addEventListener('timeupdate', function () {
+        var d = v.duration || 1;
+        var k = Math.min(n - 1, Math.floor(v.currentTime / d * n));
+        if (dEl.getAttribute('data-i') !== String(k)) { dEl.setAttribute('data-i', k); dEl.innerHTML = dida[k]; }
+        fillV.style.width = (v.currentTime / d * 100).toFixed(1) + '%';
+      });
+      v.addEventListener('ended', function () { btnV.textContent = 'Rivedi'; btnV.classList.add('si'); });
+      btnV.addEventListener('click', function () {
+        btnV.classList.remove('si');
+        v.currentTime = 0;
+        var r = v.play(); if (r && r.catch) r.catch(function () {});
+      });
+
       v.load();
       var pm = v.play();
-      if (pm && pm.catch) pm.catch(function () { fotoM(); });
+      if (pm && pm.catch) pm.catch(function () { btnV.textContent = 'Guarda il video'; btnV.classList.add('si'); });
       setTimeout(function () { if (!chiusoM) prontoM(); }, 4000);
+
+      // fuori dallo schermo il video si ferma: batteria e CPU libere
+      if (window.IntersectionObserver) {
+        new IntersectionObserver(function (voci) {
+          voci.forEach(function (x) {
+            if (x.isIntersecting) {
+              if (!v.ended && v.paused && !btnV.classList.contains('si')) { var r = v.play(); if (r && r.catch) r.catch(function () {}); }
+            } else if (!v.paused) { try { v.pause(); } catch (e) {} }
+          });
+        }, { threshold: 0.2 }).observe(cornice);
+      }
     }
 
+    // la barra in alto segue lo scroll della pagina: niente rAF continuo su telefono
     addEventListener('scroll', function () {
-      var max = heroSp.offsetHeight - innerHeight;
-      targetM = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
-      sporco = true;
+      var max = Math.max(1, document.body.scrollHeight - innerHeight);
+      barra.style.transform = 'scaleX(' + Math.min(1, scrollY / max).toFixed(4) + ')';
     }, { passive: true });
-
-    (function tickM() {
-      if (sporco) {
-        var d = targetM - correnteM;
-        correnteM += d * 0.14;
-        if (Math.abs(d) < 0.0004) { correnteM = targetM; sporco = false; }
-        aggiornaScene(correnteM);
-        // il video serve solo nell'hero: fuori lo fermo (batteria e CPU)
-        if (v && v.parentNode) {
-          var dentroM = scrollY < heroSp.offsetHeight;
-          if (dentroM !== visibileM) {
-            visibileM = dentroM;
-            v.style.visibility = dentroM ? 'visible' : 'hidden';
-            if (dentroM) { var r = v.play(); if (r && r.catch) r.catch(function () {}); }
-            else { try { v.pause(); } catch (e) {} }
-          }
-        }
-      }
-      requestAnimationFrame(tickM);
-    })();
     return;
   }
 
   /* ---------- DESKTOP: scrubbing video ---------- */
   var target = 0, corrente = 0, pronta = false;
 
+  // Una tappa da 100vh per scena (3 scene = 300vh, ~30vh per secondo di video):
+  // l'apertura resta corta e ogni rotellata porta alla scena successiva.
+  function impostaTappe() {
+    if (heroSp.children.length) return;
+    for (var i = 0; i < n; i++) {
+      var t = document.createElement('div'); t.className = 'tappa'; heroSp.appendChild(t);
+    }
+    document.documentElement.classList.add('snap');
+  }
+
   function avvia() {
     if (pronta) return;
     pronta = true;
-    heroSp.style.height = Math.round(v.duration * 110) + 'vh';
+    impostaTappe();
     chiudiPreloader();
   }
 
-  v.addEventListener('loadedmetadata', function () {
-    heroSp.style.height = Math.round(v.duration * 110) + 'vh';
-  });
+  v.addEventListener('loadedmetadata', impostaTappe);
   v.addEventListener('canplaythrough', avvia);
   v.addEventListener('error', function () { fallback(); });
 
   function fallback() {           // niente video: si comporta come mobile
     applicaSfondi();
     if (v) v.style.display = 'none';
-    heroSp.style.height = (n * 100) + 'vh';
+    impostaTappe();
     avviaSenzaVideo();
     chiudiPreloader();
   }
@@ -726,7 +800,7 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
   }, { passive: true });
 
   (function tick() {
-    corrente += (target - corrente) * 0.12;
+    corrente += (target - corrente) * 0.18;
     if (senzaVideo) {
       aggiornaScene(corrente);
     } else if (v.duration) {
