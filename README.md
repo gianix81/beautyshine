@@ -24,10 +24,9 @@ Funziona anche aprendo `index.html` in locale.
 1. **`TUO-DOMINIO.it`** → il dominio reale. Compare in `index.html`, `privacy.html`,
    `cookie.html`, `robots.txt` e `sitemap.xml`.
    Comando rapido: `sed -i '' 's|TUO-DOMINIO.it|iltuodominio.it|g' index.html privacy.html cookie.html robots.txt sitemap.xml`
-2. **`DA COMPILARE`** → i dati legali. Compaiono evidenziati in giallo nel footer di tutte
-   le pagine e dentro `privacy.html` / `cookie.html`. Servono:
+2. **`DA COMPILARE`** → i dati legali. Compaiono evidenziati in giallo dentro
+   `privacy.html` e `cookie.html`. Servono:
    - denominazione o ragione sociale del titolare del trattamento;
-   - P.IVA / codice fiscale (va messa anche come `"vatID"` nel JSON-LD di `index.html`);
    - un indirizzo e-mail per le richieste privacy (artt. 15–22 GDPR).
    Finché restano i segnaposto il sito **non è a norma**: vanno sostituiti prima di pubblicare.
    Comando rapido, una volta noti i dati:
@@ -38,6 +37,10 @@ Funziona anche aprendo `index.html` in locale.
    (le trovi su Google Maps col tasto destro sul punto).
 
 ## Privacy e GDPR
+
+- **P.IVA:** non indicata da nessuna parte. Per una ditta individuale o una societa
+  che pubblicizza la propria attivita online e buona norma indicarla; va valutato
+  col commercialista e, se serve, aggiunta nel footer e come `"vatID"` nel JSON-LD.
 
 - `privacy.html` — informativa artt. 13–14 GDPR, da far verificare a un consulente.
 - `cookie.html` — cookie policy secondo le linee guida del Garante del 10/06/2021.
