@@ -198,9 +198,13 @@ header.solido .cta-top:hover{background:var(--teal);color:#fff}
 }
 
 #hero-scroll{position:relative;z-index:2}
-/* una tappa per scena: ogni rotellata porta alla scena dopo, il video ci arriva col lerp */
+/* Tappe da ESATTAMENTE uno schermo: un gesto porta alla tappa dopo e si ferma li'.
+   L'altezza non puo' superare la finestra, altrimenti con l'aggancio obbligatorio il punto
+   successivo non si raggiunge piu' e lo scroll si inchioda a meta' (provato: resta fermo).
+   L'aggancio e' "mandatory" ma SOLO dentro l'apertura (la classe la mette e la toglie il JS):
+   sulle sezioni di sotto, piu' alte di uno schermo, obbligherebbe salti scomodi. */
 #hero-scroll .tappa{height:100vh;scroll-snap-align:start;scroll-snap-stop:always}
-html.snap{scroll-snap-type:y proximity}
+html.snap{scroll-snap-type:y mandatory}
 
 /* ---------- CONTENUTO ---------- */
 #contenuto{position:relative;z-index:20;background:var(--panna)}
@@ -749,14 +753,30 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
   /* ---------- DESKTOP: scrubbing video ---------- */
   var target = 0, corrente = 0, pronta = false;
 
-  // Una tappa da 100vh per scena (3 scene = 300vh, ~30vh per secondo di video):
-  // l'apertura resta corta e ogni rotellata porta alla scena successiva.
+  // Tappe da uno schermo: ~2 s di video ciascuna, cosi' un gesto non fa correre il video.
+  // Con 10 s di filmato sono 5 tappe = 500vh, il massimo che l'apertura puo' occupare.
   function impostaTappe() {
     if (heroSp.children.length) return;
-    for (var i = 0; i < n; i++) {
+    var durata = (v && v.duration) ? v.duration : n * 2;
+    var quante = Math.max(n, Math.min(5, Math.round(durata / 2)));
+    for (var i = 0; i < quante; i++) {
       var t = document.createElement('div'); t.className = 'tappa'; heroSp.appendChild(t);
     }
-    document.documentElement.classList.add('snap');
+    aggiornaSnap();
+  }
+
+  // L'aggancio vale solo finche' si e' dentro l'apertura: piu' giu' le sezioni sono
+  // piu' alte di uno schermo e un aggancio obbligatorio le renderebbe scomode.
+  var snapOn = false;
+  function aggiornaSnap() {
+    // Si spegne appena si arriva all'ULTIMA tappa: oltre non ci sono piu' punti di aggancio
+    // e lo scroll resterebbe inchiodato li' (provato). Si riaccende solo risalendo di mezzo
+    // schermo, cosi' non sfarfalla sul confine.
+    var fine = heroSp.offsetHeight - innerHeight;
+    var dentro = snapOn ? scrollY < fine - 8 : scrollY < fine - innerHeight * 0.5;
+    if (dentro === snapOn) return;
+    snapOn = dentro;
+    document.documentElement.classList.toggle('snap', dentro);
   }
 
   function avvia() {
@@ -793,14 +813,23 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
   function avviaSenzaVideo() { senzaVideo = true; }
 
   addEventListener('scroll', function () {
+    aggiornaSnap();
+    sveglia();
     var max = heroSp.offsetHeight - innerHeight;
     var p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
     if (senzaVideo) { target = p; }
     else if (v.duration) { target = p * (v.duration - 0.05); }
   }, { passive: true });
 
-  (function tick() {
-    corrente += (target - corrente) * 0.18;
+  // Un solo rAF, e si ferma appena il video ha raggiunto il punto dello scroll:
+  // tenerlo acceso a vuoto costava frame lunghi anche con la pagina ferma.
+  var inGiro = false;
+  function sveglia() { if (!inGiro) { inGiro = true; requestAnimationFrame(tick); } }
+  function tick() {
+    var d = target - corrente;
+    var soglia = senzaVideo ? 0.0008 : 0.012;
+    var fermo = Math.abs(d) < soglia;
+    corrente = fermo ? target : corrente + d * 0.18;
     if (senzaVideo) {
       aggiornaScene(corrente);
     } else if (v.duration) {
@@ -809,8 +838,9 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
       var dentro = scrollY < heroSp.offsetHeight;
       v.style.visibility = dentro ? 'visible' : 'hidden';
     }
-    requestAnimationFrame(tick);
-  })();
+    if (fermo) inGiro = false; else requestAnimationFrame(tick);
+  }
+  sveglia();
 })();
 </script>
 </body>
