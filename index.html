@@ -470,6 +470,38 @@ section.blocco > .contatti-wrap{flex:1 1 auto;min-height:0;width:100%}
   .rec-card{border-radius:18px 18px 60px 60px;padding:1.1rem}
   .rec-card blockquote{font-size:1.05rem}
 }
+
+/* ===== Banner del consenso (linee guida Garante 10/06/2021) =====
+   «Accetta» e «Continua senza» hanno la stessa evidenza, la X in alto a destra
+   equivale a rifiutare, lo scroll non vale come consenso, niente cookie wall. */
+#consenso{position:fixed;left:0;right:0;bottom:0;z-index:90;display:none;
+  background:var(--bianco);border-top:1px solid rgba(201,169,97,.5);
+  box-shadow:0 -14px 40px -22px rgba(11,43,48,.5)}
+#consenso.aperto{display:block}
+.cons-int{max-width:1100px;margin:0 auto;padding:1.1rem clamp(1rem,4vw,2.4rem) 1.2rem;
+  display:grid;grid-template-columns:1fr auto;gap:1rem 2rem;align-items:center}
+.cons-txt{font-size:.9rem;line-height:1.55;color:var(--inchiostro-soft);margin:0;max-width:70ch}
+.cons-txt b{color:var(--inchiostro);font-weight:500}
+.cons-txt a{color:var(--teal)}
+.cons-bottoni{display:flex;gap:.7rem;flex-wrap:wrap}
+.cons-b{cursor:pointer;font-family:var(--sans);font-size:.72rem;letter-spacing:.14em;
+  text-transform:uppercase;padding:.8rem 1.4rem;border-radius:999px;border:1px solid var(--teal);
+  min-height:44px;white-space:nowrap}
+.cons-si{background:var(--teal);color:#fff}
+.cons-no{background:transparent;color:var(--teal)}
+.cons-si:hover{background:var(--teal-scuro);border-color:var(--teal-scuro)}
+.cons-no:hover{background:rgba(15,107,120,.08)}
+.cons-x{position:absolute;top:.5rem;right:.6rem;width:38px;height:38px;border:0;background:none;
+  cursor:pointer;color:var(--inchiostro-soft);font-size:1.3rem;line-height:1;border-radius:50%}
+.cons-x:hover{background:var(--panna2);color:var(--inchiostro)}
+@media(max-width:768px){
+  .cons-int{grid-template-columns:1fr;gap:.8rem;padding:1.1rem 1.1rem calc(1rem + env(safe-area-inset-bottom))}
+  .cons-txt{padding-right:2.4rem}   /* la X in alto a destra non deve finire sul testo */
+  .cons-txt{font-size:.82rem}
+  .cons-bottoni{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+  .cons-b{padding:.75rem .6rem;font-size:.66rem;letter-spacing:.1em}
+  #consenso{max-height:60svh;overflow:auto}
+}
 </style>
 </head>
 <body class="bloccato">
@@ -674,9 +706,24 @@ section.blocco > .contatti-wrap{flex:1 1 auto;min-height:0;width:100%}
   <footer>
     <span>&copy; <span id="anno">2026</span> Beauty Shine &mdash; Estetica e Benessere &middot; Arzano (NA)</span>
     <span>Via Palmiro Togliatti 21/23 &middot; 331 859 8620</span>
-    <span class="footer-legale"><a href="privacy.html">Privacy policy</a> &middot; <a href="cookie.html">Cookie policy</a></span>
+    <span class="footer-legale"><a href="privacy.html">Privacy policy</a> &middot; <a href="cookie.html">Cookie policy</a> &middot; <a href="#" id="pref-cookie">Preferenze</a></span>
   </footer>
 </main>
+
+<div id="consenso" role="dialog" aria-live="polite" aria-label="Scelta sui contenuti di terze parti" style="position:fixed">
+  <button type="button" class="cons-x" id="cons-x" aria-label="Chiudi senza accettare">&times;</button>
+  <div class="cons-int">
+    <p class="cons-txt"><b>Questo sito non usa cookie di profilazione e non ti traccia.</b>
+      Per mostrarti la mappa serve caricarla da Google, che in quel momento riceve il tuo indirizzo IP
+      e pu&ograve; installare cookie propri. Scegli tu: senza il tuo s&igrave; non viene caricato nulla.
+      Chiudere questa finestra equivale a rifiutare. Dettagli nella
+      <a href="cookie.html">cookie policy</a> e nella <a href="privacy.html">privacy policy</a>.</p>
+    <div class="cons-bottoni">
+      <button type="button" class="cons-b cons-no" id="cons-no">Continua senza</button>
+      <button type="button" class="cons-b cons-si" id="cons-si">Accetta</button>
+    </div>
+  </div>
+</div>
 
 <a class="tel-flot" href="tel:+393318598620" aria-label="Chiama Beauty Shine al 331 859 8620">
   <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.7 21 3 13.3 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1.1l-2.3 2.1Z"/></svg>
@@ -776,21 +823,60 @@ section.blocco > .contatti-wrap{flex:1 1 auto;min-height:0;width:100%}
 
   document.getElementById('anno').textContent = new Date().getFullYear();
 
-  // mappa Google: si carica solo se la persona la attiva (nessun cookie prima del consenso)
+  /* ---------- Consenso per i contenuti di terze parti (qui: solo la mappa) ----------
+     Linee guida del Garante del 10/06/2021: niente si carica da Google prima del si';
+     «Accetta» e «Continua senza» hanno la stessa evidenza, la X equivale a rifiutare,
+     lo scroll non vale come consenso, la scelta si puo' cambiare da «Preferenze».
+     La scelta sta in localStorage (voce tecnica) e viene richiesta di nuovo dopo 6 mesi. */
+  var CHIAVE = 'bs-consenso', SEI_MESI = 182 * 24 * 60 * 60 * 1000;
+  var pannello = document.getElementById('consenso');
+
+  function leggiScelta() {
+    try {
+      var v = JSON.parse(localStorage.getItem(CHIAVE) || 'null');
+      if (!v || !v.q || (Date.now() - v.q) > SEI_MESI) return null;   // scaduta: si richiede
+      return v.s;                                                     // 'si' | 'no'
+    } catch (e) { return null; }
+  }
+  function scriviScelta(s) {
+    try { localStorage.setItem(CHIAVE, JSON.stringify({ s: s, q: Date.now() })); } catch (e) {}
+  }
+  function apriPannello() { if (pannello) pannello.classList.add('aperto'); }
+  function chiudiPannello() { if (pannello) pannello.classList.remove('aperto'); }
+
+  function caricaMappa() {
+    var box = document.getElementById('mappa-box');
+    if (!box || box.querySelector('iframe')) return;
+    var f = document.createElement('iframe');
+    f.className = 'mappa';
+    f.title = 'Mappa Beauty Shine Arzano';
+    f.loading = 'lazy';
+    f.referrerPolicy = 'no-referrer-when-downgrade';
+    f.src = 'https://www.google.com/maps?q=Via%20Palmiro%20Togliatti%2021%2C%2080022%20Arzano%20NA&output=embed';
+    box.innerHTML = '';
+    box.appendChild(f);
+  }
+
   var mBtn = document.getElementById('mappa-btn');
   if (mBtn) {
+    // il segnaposto non carica niente da solo: o c'e' gia' il si', o apre la scelta
     mBtn.addEventListener('click', function () {
-      var box = document.getElementById('mappa-box');
-      var f = document.createElement('iframe');
-      f.className = 'mappa';
-      f.title = 'Mappa Beauty Shine Arzano';
-      f.loading = 'lazy';
-      f.referrerPolicy = 'no-referrer-when-downgrade';
-      f.src = 'https://www.google.com/maps?q=Via%20Palmiro%20Togliatti%2021%2C%2080022%20Arzano%20NA&output=embed';
-      box.innerHTML = '';
-      box.appendChild(f);
+      if (leggiScelta() === 'si') caricaMappa(); else apriPannello();
     });
   }
+  var si = document.getElementById('cons-si'),
+      no = document.getElementById('cons-no'),
+      ics = document.getElementById('cons-x'),
+      pref = document.getElementById('pref-cookie');
+  if (si) si.addEventListener('click', function () { scriviScelta('si'); chiudiPannello(); caricaMappa(); });
+  if (no) no.addEventListener('click', function () { scriviScelta('no'); chiudiPannello(); });
+  if (ics) ics.addEventListener('click', function () { scriviScelta('no'); chiudiPannello(); });  // X = rifiuto
+  if (pref) pref.addEventListener('click', function (e) { e.preventDefault(); apriPannello(); });
+
+  // le pagine legali rimandano qui con #preferenze per far cambiare idea
+  if (location.hash === '#preferenze') { apriPannello(); history.replaceState(null, '', location.pathname); }
+  else if (leggiScelta() === null) setTimeout(apriPannello, 1200);   // mai prima che la pagina sia leggibile
+  if (leggiScelta() === 'si') caricaMappa();
 
   // Entrata a cascata: quando una pagina entra in vista, i suoi elementi salgono uno dopo l'altro.
   // Solo opacity e transform, una volta sola per sezione: nessun costo mentre si scorre.
