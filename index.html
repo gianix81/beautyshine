@@ -371,6 +371,81 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
   .cta-grande{margin-top:.6rem}
   .titolo-sez{font-size:1.7rem}
 }
+
+/* ===== Ogni pagina e' una composizione piena, non testo in alto e vuoto sotto ===== */
+section.blocco{justify-content:flex-start}
+section.blocco > .griglia,
+section.blocco > .galleria,
+section.blocco > .faq,
+section.blocco > .duo,
+section.blocco > .contatti-wrap{flex:1 1 auto;min-height:0;width:100%}
+
+/* servizi: dieci riquadri che riempiono la pagina */
+.griglia{grid-template-rows:repeat(2,minmax(0,1fr));align-content:stretch}
+.card{height:100%;display:flex;flex-direction:column;justify-content:center;padding:1.1rem 1rem 1.3rem}
+.card p{display:block}
+
+/* testo + foto grande, affiancati e centrati */
+.duo{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(1.5rem,4vw,3.4rem);align-items:center}
+.duo-txt{display:flex;flex-direction:column;justify-content:center}
+.duo-img{margin:0;position:relative;overflow:hidden;border-radius:220px 220px 16px 16px;
+  box-shadow:0 26px 60px -28px rgba(11,43,48,.45)}
+.duo-img img{display:block;width:100%;height:min(62vh,540px);object-fit:cover;transition:transform 1s cubic-bezier(.22,.9,.3,1)}
+.duo-img:hover img{transform:scale(1.05)}
+.duo-img figcaption{position:absolute;left:0;right:0;bottom:0;padding:1.6rem 1rem .9rem;text-align:center;
+  font-family:var(--serif);font-size:1.15rem;color:#fff;
+  background:linear-gradient(0deg,rgba(11,43,48,.72),rgba(11,43,48,0))}
+.duo-inv .duo-img{order:-1}
+.passi-col{grid-template-columns:1fr;gap:1rem;margin-top:.4rem}
+.passi-col .passo{padding-left:0}
+
+/* galleria: sei foto che riempiono la pagina */
+.galleria{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,minmax(0,1fr));align-content:stretch}
+.galleria figure{height:100%;border-radius:160px 160px 14px 14px}
+
+/* FAQ: due colonne, cosi' la pagina non resta mezza vuota */
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(1.5rem,4vw,3.2rem);align-content:space-evenly}
+/* le domande respirano e riempiono la pagina invece di stare ammucchiate */
+@media(min-width:769px){
+  .faq details{padding:1.05rem 0}
+  .faq summary{font-size:1.05rem}
+  .card{padding:1.3rem 1.1rem 1.5rem}
+  .card h3{font-size:1.18rem}
+  .card p{font-size:.84rem}
+}
+
+.contatti-wrap{align-items:center}
+.mappa,.mappa-box{height:min(52vh,430px)}
+
+/* ===== Entrata a cascata: niente deve sembrare fermo ===== */
+@media(prefers-reduced-motion:no-preference){
+  .blocco .filo,.blocco .titolo-sez,.blocco .sotto-sez,.blocco .card,.blocco .passo,
+  .blocco .duo-img,.blocco .galleria figure,.blocco details,.blocco .info-riga,
+  .blocco .cta-grande,.blocco .social-riga,.blocco .mappa-box{
+    opacity:0;transform:translateY(18px);
+    transition:opacity .55s ease var(--d,0s),transform .65s cubic-bezier(.22,.9,.3,1) var(--d,0s)}
+  .blocco.vista .filo,.blocco.vista .titolo-sez,.blocco.vista .sotto-sez,.blocco.vista .card,
+  .blocco.vista .passo,.blocco.vista .duo-img,.blocco.vista .galleria figure,.blocco.vista details,
+  .blocco.vista .info-riga,.blocco.vista .cta-grande,.blocco.vista .social-riga,.blocco.vista .mappa-box{
+    opacity:1;transform:none}
+}
+
+/* telefono: la composizione diventa verticale ma resta piena */
+@media(max-width:768px){
+  .duo{grid-template-columns:1fr;gap:.8rem;align-content:center}
+  .duo-img{border-radius:90px 90px 12px 12px}
+  .duo-img img{height:min(26svh,240px)}
+  .duo-inv .duo-img{order:0}
+  .passi-col{gap:.5rem}
+  .passi-col .passo h3{font-size:1rem}
+  .passi-col .passo p{font-size:.82rem}
+  .galleria{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,minmax(0,1fr))}
+  .galleria figure{height:100%;border-radius:60px 60px 10px 10px}
+  .faq{grid-template-columns:1fr}
+  .griglia{grid-template-rows:repeat(5,minmax(0,1fr))}
+  .mappa,.mappa-box{height:min(22svh,200px)}
+  .duo-img figcaption{font-size:.9rem;padding:1rem .6rem .5rem}
+}
 </style>
 </head>
 <body class="bloccato">
@@ -459,24 +534,40 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
   <section class="blocco" id="centro">
     <div class="filo"></div>
     <h2 class="titolo-sez">Il <em>centro</em></h2>
-    <p class="sotto-sez">Beauty Shine è un centro estetico di Arzano, in provincia di Napoli. Il salone in Via Palmiro Togliatti, all'angolo con Via Sanremo, è stato inaugurato a maggio 2025: archi retroilluminati, marmo e ottone, e uno spazio dedicato a ogni servizio — dal Nails Space alla cabina laser, fino all'area relax per i massaggi.</p>
-    <div class="passi">
-      <div class="passo"><h3>Su appuntamento</h3><p>Lavoriamo su appuntamento per dedicarti il tempo che serve, senza attese e senza fretta.</p></div>
-      <div class="passo"><h3>Prodotti professionali</h3><p>Marchi professionali e protocolli di igiene rispettati su ogni singolo trattamento.</p></div>
-      <div class="passo"><h3>Consulenza prima</h3><p>Prima di partire ti diciamo cosa è realistico aspettarsi, quante sedute servono e quanto costa.</p></div>
+    <div class="duo">
+      <div class="duo-txt">
+        <p class="sotto-sez">Beauty Shine è un centro estetico di Arzano, in provincia di Napoli. Il salone in Via Palmiro Togliatti, all'angolo con Via Sanremo, è stato inaugurato a maggio 2025: archi retroilluminati, marmo e ottone, e uno spazio dedicato a ogni servizio — dal Nails Space alla cabina laser, fino all'area relax per i massaggi.</p>
+        <div class="passi passi-col">
+          <div class="passo"><h3>Su appuntamento</h3><p>Lavoriamo su appuntamento per dedicarti il tempo che serve, senza attese e senza fretta.</p></div>
+          <div class="passo"><h3>Prodotti professionali</h3><p>Marchi professionali e protocolli di igiene rispettati su ogni singolo trattamento.</p></div>
+          <div class="passo"><h3>Consulenza prima</h3><p>Prima di partire ti diciamo cosa è realistico aspettarsi, quante sedute servono e quanto costa.</p></div>
+        </div>
+      </div>
+      <figure class="duo-img">
+        <img src="assets/sala-02.jpg" alt="Il Nails Space di Beauty Shine, con le postazioni manicure" loading="lazy" decoding="async">
+        <figcaption>Il Nails Space</figcaption>
+      </figure>
     </div>
   </section>
 
   <section class="blocco" id="prenotare">
     <div class="filo"></div>
     <h2 class="titolo-sez">Come <em>prenotare</em></h2>
-    <p class="sotto-sez">Solo per telefono o di persona. Tre passaggi, due minuti.</p>
-    <div class="passi">
-      <div class="passo"><h3>Chiamaci in salone</h3><p>Al 331 859 8620, dicendo il trattamento che ti interessa. Se preferisci, passa di persona negli orari di apertura.</p></div>
-      <div class="passo"><h3>Scegliamo insieme</h3><p>Ti diciamo prezzo, durata e primo giorno libero. Se hai dubbi, ne parliamo prima.</p></div>
-      <div class="passo"><h3>Ti aspettiamo in salone</h3><p>Via Palmiro Togliatti 21/23, Arzano. Dal martedì al sabato, dalle 9:30 alle 20:00.</p></div>
+    <div class="duo duo-inv">
+      <figure class="duo-img">
+        <img src="assets/sala-01.jpg" alt="Lo staff di Beauty Shine davanti all'insegna del centro" loading="lazy" decoding="async">
+        <figcaption>Ti aspettiamo qui</figcaption>
+      </figure>
+      <div class="duo-txt">
+        <p class="sotto-sez">Solo per telefono o di persona. Tre passaggi, due minuti.</p>
+        <div class="passi passi-col">
+          <div class="passo"><h3>Chiamaci in salone</h3><p>Al 331 859 8620, dicendo il trattamento che ti interessa. Se preferisci, passa di persona negli orari di apertura.</p></div>
+          <div class="passo"><h3>Scegliamo insieme</h3><p>Ti diciamo prezzo, durata e primo giorno libero. Se hai dubbi, ne parliamo prima.</p></div>
+          <div class="passo"><h3>Ti aspettiamo in salone</h3><p>Via Palmiro Togliatti 21/23, Arzano. Dal martedì al sabato, dalle 9:30 alle 20:00.</p></div>
+        </div>
+        <a class="cta-grande" href="tel:+393318598620">Chiama 331 859 8620</a>
+      </div>
     </div>
-    <a class="cta-grande" href="tel:+393318598620">Chiama 331 859 8620</a>
   </section>
 
   <section class="blocco" id="galleria">
@@ -656,6 +747,22 @@ footer{border-top:1px solid rgba(201,169,97,.3);background:var(--teal);color:rgb
       box.innerHTML = '';
       box.appendChild(f);
     });
+  }
+
+  // Entrata a cascata: quando una pagina entra in vista, i suoi elementi salgono uno dopo l'altro.
+  // Solo opacity e transform, una volta sola per sezione: nessun costo mentre si scorre.
+  var sezioni = [].slice.call(document.querySelectorAll('section.blocco'));
+  sezioni.forEach(function (sez) {
+    var figli = sez.querySelectorAll('.filo,.titolo-sez,.sotto-sez,.card,.passo,.duo-img,.galleria figure,details,.info-riga,.cta-grande,.social-riga,.mappa-box');
+    [].forEach.call(figli, function (el, i) { el.style.setProperty('--d', Math.min(i * 0.055, 0.5) + 's'); });
+  });
+  if (window.IntersectionObserver) {
+    var ioSez = new IntersectionObserver(function (voci) {
+      voci.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('vista'); ioSez.unobserve(x.target); } });
+    }, { threshold: 0.18 });
+    sezioni.forEach(function (sez) { ioSez.observe(sez); });
+  } else {
+    sezioni.forEach(function (sez) { sez.classList.add('vista'); });
   }
 
   // FAQ: una sola risposta aperta alla volta, altrimenti la sezione sfora la pagina
